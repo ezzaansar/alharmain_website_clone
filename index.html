@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Haramain </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    .glass {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .dropdown-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .card-shadow {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .gradient-bg {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .kaaba-bg {
+      background-image: url('images/kaba\ logo.jpg');
+      background-size: 42px 42px;
+      background-repeat: no-repeat;
+      background-position: center;
+
+    }
+
+    .mosque-bg {
+      background-image: url('images/madinah.png');
+      background-size: 42px 42px;
+      background-repeat: no-repeat;
+      background-position: center;
+
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .experience-box {
+      background: linear-gradient(135deg, #d4af37, #c9b037);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .image-placeholder {
+      background: linear-gradient(135deg, #8b4513, #a0522d);
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .kaaba-image {
+      background: linear-gradient(135deg, #2c1810, #4a2c17);
+      background-image:
+        radial-gradient(circle at 30% 40%, #d4af37 2px, transparent 2px),
+        radial-gradient(circle at 70% 60%, #d4af37 1px, transparent 1px);
+    }
+
+    .mosque-interior {
+      background: linear-gradient(135deg, #6b4423, #8b5a2b);
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.1) 10px, rgba(212, 175, 55, 0.1) 20px);
+    }
+
+    .crowd-image {
+      background: linear-gradient(135deg, #4a4a4a, #6a6a6a);
+      background-image:
+        radial-gradient(circle at 20% 20%, #d4af37 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, #d4af37 1px, transparent 1px);
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+    .font-playfair {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .quote-marks {
+      font-size: 4rem;
+      line-height: 1;
+      color: #c1a269;
+      font-family: Georgia, serif;
+    }
+
+    .star {
+      color: #c1a269;
+    }
+
+    @keyframes scrollInfinite {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-scroll {
+      animation: scrollInfinite 30s linear infinite;
+    }
+
+    @keyframes scrollInfinite {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-scroll {
+      animation: scrollInfinite 30s linear infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- Mobile Top Navbar: All logos in one row -->
+  <div class="w-full border-b bg-white py-2 px-2 flex items-center justify-between gap-2 sm:hidden">
+    <img src="images/logo3.png" class="h-14 w-35 rounded-lg bg-white p-1 shadow" alt="Kaaba" />
+    <img src="images/logo2.png" class="h-8" alt="IATA" />
+    <img src="images/logo1.png" class="h-8" alt="Trustpilot" />
+    <button class="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center"><i
+        class="fab fa-whatsapp text-white text-2xl"></i></button>
+    <button class="w-10 h-10 bg-[#c1a269] rounded-lg flex items-center justify-center"><i
+        class="fas fa-phone-alt text-white text-2xl"></i></button>
+  </div>
+  <!-- Mobile Main Navbar: Home and Hamburger (under logo row) -->
+  <div x-data="{ open: false }" class="w-full bg-black bg-opacity-80 flex flex-col sm:hidden">
+    <div class="flex items-center justify-between px-4 py-2">
+      <span class="text-white text-2xl font-normal">Home</span>
+      <button @click="open = !open"><i class="fas fa-bars text-white text-3xl"></i></button>
+    </div>
+    <div x-show="open" @click.away="open = false" class="flex flex-col gap-2 px-4 pb-4 animate-fade-in"
+      style="display: none;">
+      <a href="index.html" class="text-white text-lg py-1">Home</a>
+      <a href="packagesdetail.html" class="text-white text-lg py-1">Umrah Packages</a>
+      <a href="packageslisting.html" class="text-white text-lg py-1">Hajj 2025</a>
+      <a href="holidays.html" class="text-white text-lg py-1">Umrah and Holiday</a>
+      <a href="blogsdetail.html" class="text-white text-lg py-1">Umrah Info</a>
+      <a href="contact.html" class="text-white text-lg py-1">Contact Us</a>
+      <a href="beatmyprice.html" class="text-white text-lg py-1">Beat my prize</a>
+    </div>
+  </div>
+
+  <!-- Desktop Top Navbar -->
+  <div class="w-full border-b bg-white py-3 px-2 sm:px-4 md:px-8 hidden sm:block">
+    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+
+      <!-- Logo + Trust -->
+      <div class="flex flex-col md:flex-row items-center md:gap-14 w-full md:w-auto">
+        <!-- Logo -->
+        <div class="flex justify-center md:justify-start items-center gap-4 md:gap-6 md:ml-20">
+          <img src="images/logo3.png" class="h-[70px] w-[140px] sm:h-[100px] sm:w-[220px]" alt="Kaaba" />
+        </div>
+        <!-- Trust Badges -->
+        <div class="flex justify-center md:justify-start items-center gap-6 md:gap-14 mt-2 md:mt-0 md:ml-20">
+          <img src="images/logo2.png" class="h-7 sm:h-9" alt="IATA" />
+          <img src="images/logo1.png" class="h-8 sm:h-11" alt="Trustpilot" />
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full md:w-auto md:justify-end mt-2 md:mt-0">
+        <!-- WhatsApp -->
+        <div class="flex items-center gap-2">
+          <div class="bg-green-700 text-white p-2 rounded-md">
+            <i class="fab fa-whatsapp text-2xl sm:text-3xl"></i>
+          </div>
+          <div class="text-center sm:text-left">
+            <p class="text-xs sm:text-sm text-gray-500">WhatsApp:</p>
+            <p class="font-bold text-[#c1a269] text-sm sm:text-base">0203 062 8926</p>
+          </div>
+        </div>
+
+        <!-- Call Now -->
+        <div class="flex items-center gap-2 md:mr-20">
+          <div class="bg-[#c7a86c] text-white p-2 rounded-md">
+            <i class="fas fa-phone-alt text-xl sm:text-2xl"></i>
+          </div>
+          <div class="text-center sm:text-left">
+            <p class="text-xs sm:text-sm text-gray-500">Call Now:</p>
+            <p class="font-bold text-[#c1a269] text-sm sm:text-base">0203 062 8926</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section with Background Image Only -->
+  <div class="relative min-h-[70vh] bg-cover bg-center w-full text-white pb-40"
+    style="background-image: url('images/kaaba.jpg');">
+
+    <!-- Navbar -->
+    <nav class="w-full glass border-t border-gray-300 shadow-sm z-20 relative hidden sm:block">
+      <div class="max-w-screen-xl mx-auto flex items-center justify-center px-4 md:px-8">
+        <ul class="flex flex-wrap items-center gap-6 md:gap-10 py-8 font-medium text-white">
+          <li><a href="index.html" class="hover:text-[#c1a269] transition-colors duration-200">Home</a></li>
+          <li class="relative group">
+            <button class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+              Umrah Packages
+              <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+              <li><a href="packageslisting.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Economy Umrah</a></li>
+              <li><a href="packageslisting.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Premium Umrah</a></li>
+              <li><a href="packageslisting.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">VIP Umrah</a></li>
+            </ul>
+          </li>
+          <li class="relative group">
+            <button class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+              Hajj 2025
+              <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+              <li><a href="packagesdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Economy Hajj</a></li>
+              <li><a href="packagesdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Premium Hajj</a></li>
+            </ul>
+          </li>
+          <li><a href="holidays.html" class="hover:text-[#c1a269] transition-colors duration-200">Umrah and Holiday</a></li>
+          <li class="relative group">
+            <button class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+              Umrah Info
+              <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+              <li><a href="blogsdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Visa Info</a></li>
+              <li><a href="blogsdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Travel Guide</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html" class="hover:text-[#c1a269] transition-colors duration-200">Contact Us</a></li>
+          <li><a href="beatmyprice.html" class="hover:text-[#c1a269] transition-colors duration-200">Beat my prize</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Form -->
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-[60vh] pt-12 px-4">
+      <div
+        class="glass rounded-[3rem] border-[0.5px] border-white p-8 md:py-16 px-4 md:px-48 w-full max-w-6xl text-center shadow-2xl backdrop-blur-2xl bg-[rgba(255,255,255,0.08)]">
+        <h2 class="text-2xl md:text-4xl font-bold mb-8 text-white leading-tight">
+          Customize your Divine Journey with <br />
+          <span class="font-bold">Best Umrah Packages</span>
+        </h2>
+        <form class="space-y-8">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4">
+            <div class="flex flex-col text-left">
+              <label class="text-white text-base mb-1" for="month">Month</label>
+              <input id="month" type="text" placeholder="April"
+                class="bg-[rgba(255,255,255,0.08)] border-[0.5px] border-white text-white placeholder-white rounded-xl px-4 py-2 text-base w-full h-12 focus:ring-yellow-500 focus:ring-2" />
+            </div>
+            <div class="flex flex-col text-left">
+              <label class="text-white text-base mb-1" for="days">Days</label>
+              <input id="days" type="number" placeholder="14"
+                class="bg-[rgba(255,255,255,0.08)] border-[0.5px] border-white text-white placeholder-white rounded-xl px-4 py-2 text-base w-full h-12 focus:ring-yellow-500 focus:ring-2" />
+            </div>
+            <div class="flex flex-col text-left">
+              <label class="text-white text-base mb-1" for="persons">Persons</label>
+              <input id="persons" type="text" placeholder="2-4"
+                class="bg-[rgba(255,255,255,0.08)] border-[0.5px] border-white text-white placeholder-white rounded-xl px-4 py-2 text-base w-full h-12 focus:ring-yellow-500 focus:ring-2" />
+            </div>
+            <div class="flex flex-col text-left">
+              <label class="text-white text-base mb-1" for="fullname">Full Name</label>
+              <input id="fullname" type="text"
+                class="bg-[rgba(255,255,255,0.08)] border-[0.5px] border-white text-white placeholder-white rounded-xl px-4 py-2 text-base w-full h-12 focus:ring-yellow-500 focus:ring-2" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+            <div class="flex flex-col text-left">
+              <label class="text-white text-base mb-1" for="contact">Contact Number</label>
+              <input id="contact" type="text" placeholder="000 0000 000"
+                class="bg-[rgba(255,255,255,0.08)] border-[0.5px] border-white text-white placeholder-white rounded-xl px-4 py-2 text-base w-full h-12 focus:ring-yellow-500 focus:ring-2" />
+            </div>
+            <div class="flex flex-col text-left">
+              <label class="text-white text-base mb-1" for="email">Email Id</label>
+              <input id="email" type="text" placeholder="Demo@123"
+                class="bg-[rgba(255,255,255,0.08)] border-[0.5px] border-white text-white placeholder-white rounded-xl px-4 py-2 text-base w-full h-12 focus:ring-yellow-500 focus:ring-2" />
+            </div>
+            <div class="flex flex-col justify-end">
+              <button type="submit"
+                class="bg-[#c7a86c] hover:bg-[#b8955c] text-black font-bold text-base px-4 h-12 rounded-xl w-52 mx-auto transition-colors duration-200 shadow-lg">
+                SUBMIT
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar (moved outside background image section) -->
+  <div class="w-full flex justify-center bg-transparent">
+    <div
+      class="bg-[#c7a86c] text-white px-6 py-9 rounded-3xl flex gap-20 text-center max-w-6xl w-full items-center justify-center -mt-16 z-20 relative">
+      <div>
+        <p class="text-2xl font-bold">10+</p>
+        <p class="text-sm">Years of Experience</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold">30K+</p>
+        <p class="text-sm">Satisfied Pilgrims</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold">95%</p>
+        <p class="text-sm">Success Travellers</p>
+      </div>
+      <div>
+        <p class="text-2xl font-bold">4.8*</p>
+        <p class="text-sm">Client Ratings</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- White Section Below -->
+  <section class=" pb-16 px-4 bg-white mt-[150px]">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl md:text-6xl font-medium mb-4 text-black font-serif">Browse Popular Umrah Packages</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto mb-12">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae,
+        nec mattis lectus quam pretium amet facilisis.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <!-- Card 1 -->
+      <div class="group relative rounded-xl overflow-hidden md:col-span-2 h-64">
+        <img src="images/image1.jpg" alt="Ramadan Umrah"
+          class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110 origin-center">
+        <div class="absolute inset-0 bg-black bg-opacity-50 p-6 flex flex-col justify-end">
+          <h3 class="text-white text-xl md:text-2xl font-bold mb-1">Ramadan Umrah Packages</h3>
+          <p class="text-gray-200 text-sm">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis
+            lectus quam pretium amet facilisis.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group relative rounded-xl overflow-hidden h-64">
+        <img src="images/image2.jpg" alt="Easter Umrah"
+          class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110 origin-center">
+        <div class="absolute inset-0 bg-black bg-opacity-50 p-6 flex flex-col justify-end">
+          <h3 class="text-white text-xl font-bold mb-1">Easter Holidays Umrah</h3>
+          <p class="text-gray-200 text-sm">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis
+            lectus quam pretium amet facilisis.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group relative rounded-xl overflow-hidden h-64">
+        <img src="images/image3.png" alt="December Umrah"
+          class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110 origin-center">
+        <div class="absolute inset-0 bg-black bg-opacity-50 p-6 flex flex-col justify-end">
+          <h3 class="text-white text-xl font-bold mb-1">December Umrah Packages</h3>
+          <p class="text-gray-200 text-sm">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis
+            lectus quam pretium amet facilisis.</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="group relative rounded-xl overflow-hidden md:col-span-2 h-64">
+        <img src="images/image 4.jpg" alt="Hajj Packages"
+          class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110 origin-center">
+        <div class="absolute inset-0 bg-black bg-opacity-50 p-6 flex flex-col justify-end">
+          <h3 class="text-white text-xl md:text-2xl font-bold mb-1">Hajj Packages</h3>
+          <p class="text-gray-200 text-sm">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis
+            lectus quam pretium amet facilisis.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-medium font-serif text-gray-900 mb-4">Featured affordable Umrah packages 2025</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Urna, massa aliquet dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet
+          facilisis.
+        </p>
+      </div>
+
+
+
+    </div>
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-8 mb-8">
+      <!-- Month Dropdown -->
+      <div
+        class="flex items-center gap-1 bg-white border border-gray-300 px-4 py-2 rounded-lg ml-0 lg:ml-[200px] w-full lg:w-auto justify-center lg:justify-start mb-4 lg:mb-0">
+        <div class="relative w-full lg:w-auto">
+          <button
+            class="bg-green-700 text-white px-6 py-3 rounded-lg flex items-center gap-3 hover:bg-green-800 transition-colors min-w-40 w-full lg:w-auto justify-center">
+            <span>Select Month</span>
+            <svg class="w-4 h-4 dropdown-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Duration Buttons -->
+      <div
+        class="flex flex-col sm:flex-row items-center gap-2 sm:gap-1 bg-white border border-gray-300 px-2 sm:px-4 py-2 rounded-lg w-full lg:w-auto justify-center lg:justify-start mb-4 lg:mb-0">
+        <div class="flex items-center gap-2 sm:gap-4 w-full justify-center">
+          <label class="cursor-pointer">
+            <input type="radio" name="duration" value="7" class="peer sr-only" checked>
+            <span
+              class="px-4 sm:px-6 py-2 sm:py-3 rounded-lg border border-gray-300 bg-white text-gray-700 peer-checked:bg-green-700 peer-checked:text-white peer-checked:border-green-700 transition-colors w-full sm:w-auto block text-center">7
+              Days</span>
+          </label>
+          <label class="cursor-pointer">
+            <input type="radio" name="duration" value="10" class="peer sr-only">
+            <span
+              class="px-4 sm:px-6 py-2 sm:py-3 rounded-lg border border-gray-300 bg-white text-gray-700 peer-checked:bg-green-700 peer-checked:text-white peer-checked:border-green-700 transition-colors w-full sm:w-auto block text-center">10
+              Days</span>
+          </label>
+          <label class="cursor-pointer">
+            <input type="radio" name="duration" value="14" class="peer sr-only">
+            <span
+              class="px-4 sm:px-6 py-2 sm:py-3 rounded-lg border border-gray-300 bg-white text-gray-700 peer-checked:bg-green-700 peer-checked:text-white peer-checked:border-green-700 transition-colors w-full sm:w-auto block text-center">14
+              Days</span>
+          </label>
+        </div>
+      </div>
+      <!-- Rating Controls -->
+      <div
+        class="p-2 sm:p-4 bg-white rounded-lg outline outline-1 outline-gray-300 mr-0 lg:mr-[200px] w-full lg:w-auto flex justify-center lg:justify-end">
+        <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 w-full justify-center">
+
+          <!-- 3 Star Rating -->
+          <label class="cursor-pointer mb-2 sm:mb-0">
+            <input type="radio" name="rating" value="3" class="peer sr-only" checked>
+            <div
+              class="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-green-700 bg-white transition-colors peer-checked:bg-green-800 peer-checked:text-white">
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          </label>
+
+          <!-- 4 Star Rating -->
+          <label class="cursor-pointer mb-2 sm:mb-0">
+            <input type="radio" name="rating" value="4" class="peer sr-only">
+            <div
+              class="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-green-700 bg-white transition-colors peer-checked:bg-green-800 peer-checked:text-white">
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          </label>
+
+          <!-- 5 Star Rating -->
+          <label class="cursor-pointer mb-2 sm:mb-0">
+            <input type="radio" name="rating" value="5" class="peer sr-only">
+            <div
+              class="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-green-700 bg-white transition-colors peer-checked:bg-green-800 peer-checked:text-white">
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+              <svg class="w-4 h-4 fill-current transition-colors peer-checked:fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+          </div>
+          </label>
+
+        </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <!--copy from here--> <!-- 3 Star Rating -->
+
+  <div class="flex flex-wrap gap-6 justify-center">
+    <!-- Left Card (duplicate) -->
+    <div class="bg-white rounded-2xl card-shadow overflow-hidden max-w-sm outline outline-1 outline-offset-2"
+      style="outline-color: #c1a269;">
+      <div
+        class="relative h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-600 overflow-hidden mt-2 mr-2 ml-2 rounded-2xl">
+        <img src="images/kabaa.png" alt="Kaaba" class="w-full h-full object-cover">
+        <div class="absolute top-3 left-0 bg-black text-white px-3 py-1 rounded text-sm font-medium">DEPOSIT ONLY £50
+        </div>
+      </div>
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Umrah Package</h3>
+          <div class="flex">
+            <svg class="w-5 h-5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">7 Days 6 Nights</p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 kaaba-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Makkah</p>
+              <p class="text-xs text-gray-600">5 Days</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 mosque-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Madinah</p>
+              <p class="text-xs text-gray-600">4 Days</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span class="text-xs text-gray-600">Flight Economy</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-xs text-gray-600">Visa Transfers</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-xs text-gray-600">Transportation</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <span class="text-xs text-gray-600">Hotels Included</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div><span class="text-2xl font-bold text-gray-800">£500</span><span class="text-sm text-gray-600"> Per
+              person</span></div>
+          <button
+            class="text-black px-7 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            style="background-color: #c1a269;"><i class="fas fa-phone text-black"></i>Call Now</button>
+        </div>
+        <button
+          class="w-full mt-4 border border-yellow-600 text-yellow-600 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors"
+          style="border-color: #c1a269; color: #c1a269;">Details</button>
+      </div>
+    </div>
+
+    <!-- Center Card (original) -->
+    <div class="bg-white rounded-2xl card-shadow overflow-hidden max-w-sm outline outline-1 outline-offset-2"
+      style="outline-color: #c1a269;">
+      <!-- Header Image -->
+      <div
+        class="relative h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-600 overflow-hidden mt-2 mr-2 ml-2 rounded-2xl">
+        <img src="images/kabaa.png" alt="Kaaba" class="w-full h-full object-cover">
+        <div class="absolute top-3 left-0  bg-black text-white px-3 py-1 rounded text-sm font-medium">
+          DEPOSIT ONLY £50
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Umrah Package</h3>
+          <div class="flex">
+            <svg class="w-5 h-5  fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+          </div>
+        </div>
+
+        <p class="text-gray-600 text-sm mb-4">7 Days 6 Nights</p>
+
+        <!-- Location Info -->
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 kaaba-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Makkah</p>
+              <p class="text-xs text-gray-600">5 Days</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 mosque-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Madinah</p>
+              <p class="text-xs text-gray-600">4 Days</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span class="text-xs text-gray-600">Flight Economy</span>
+          </div>
+
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-xs text-gray-600">Visa Transfers</span>
+          </div>
+
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-xs text-gray-600">Transportation</span>
+          </div>
+
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <span class="text-xs text-gray-600">Hotels Included</span>
+          </div>
+        </div>
+
+
+        <!-- Price and Action -->
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-2xl font-bold text-gray-800">£500</span>
+            <span class="text-sm text-gray-600">Per person</span>
+          </div>
+          <button
+            class="text-black px-7 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            style="background-color: #c1a269;">
+            <i class="fas fa-phone text-black"></i>
+            Call Now
+          </button>
+
+        </div>
+
+        <!-- Details Button -->
+        <button
+          class="w-full mt-4 border border-yellow-600 text-yellow-600 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors"
+          style="border-color: #c1a269; color: #c1a269;">
+          Details
+        </button>
+      </div>
+    </div>
+    <!-- Right Card (duplicate) -->
+    <div class="bg-white rounded-2xl card-shadow overflow-hidden max-w-sm outline outline-1 outline-offset-2"
+      style="outline-color: #c1a269;">
+      <div
+        class="relative h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-600 overflow-hidden mt-2 mr-2 ml-2 rounded-2xl">
+        <img src="images/kabaa.png" alt="Kaaba" class="w-full h-full object-cover">
+        <div class="absolute top-3 left-0 bg-black text-white px-3 py-1 rounded text-sm font-medium">DEPOSIT ONLY £50
+        </div>
+      </div>
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Umrah Package</h3>
+          <div class="flex">
+            <svg class="w-5 h-5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">7 Days 6 Nights</p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 kaaba-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Makkah</p>
+              <p class="text-xs text-gray-600">5 Days</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 mosque-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Madinah</p>
+              <p class="text-xs text-gray-600">4 Days</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span class="text-xs text-gray-600">Flight Economy</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-xs text-gray-600">Visa Transfers</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-xs text-gray-600">Transportation</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <span class="text-xs text-gray-600">Hotels Included</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div><span class="text-2xl font-bold text-gray-800">£500</span><span class="text-sm text-gray-600"> Per
+              person</span></div>
+          <button
+            class="text-black px-7 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            style="background-color: #c1a269;"><i class="fas fa-phone text-black"></i>Call Now</button>
+        </div>
+        <button
+          class="w-full mt-4 border border-yellow-600 text-yellow-600 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors"
+          style="border-color: #c1a269; color: #c1a269;">Details</button>
+      </div>
+    </div>
+  </div>
+  <!-- New row of three identical cards below -->
+  <div class="flex flex-wrap gap-6 justify-center mt-12">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-2xl card-shadow overflow-hidden max-w-sm outline outline-1 outline-offset-2"
+      style="outline-color: #c1a269;">
+      <div
+        class="relative h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-600 overflow-hidden mt-2 mr-2 ml-2 rounded-2xl">
+        <img src="images/kabaa.png" alt="Kaaba" class="w-full h-full object-cover">
+        <div class="absolute top-3 left-0 bg-black text-white px-3 py-1 rounded text-sm font-medium">DEPOSIT ONLY £50
+        </div>
+      </div>
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Umrah Package</h3>
+          <div class="flex">
+            <svg class="w-5 h-5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">7 Days 6 Nights</p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 kaaba-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Makkah</p>
+              <p class="text-xs text-gray-600">5 Days</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 mosque-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Madinah</p>
+              <p class="text-xs text-gray-600">4 Days</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span class="text-xs text-gray-600">Flight Economy</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-xs text-gray-600">Visa Transfers</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-xs text-gray-600">Transportation</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <span class="text-xs text-gray-600">Hotels Included</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div><span class="text-2xl font-bold text-gray-800">£500</span><span class="text-sm text-gray-600"> Per
+              person</span></div>
+          <button
+            class="text-black px-7 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            style="background-color: #c1a269;"><i class="fas fa-phone text-black"></i>Call Now</button>
+        </div>
+        <button
+          class="w-full mt-4 border border-yellow-600 text-yellow-600 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors"
+          style="border-color: #c1a269; color: #c1a269;">Details</button>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-2xl card-shadow overflow-hidden max-w-sm outline outline-1 outline-offset-2"
+      style="outline-color: #c1a269;">
+      <div
+        class="relative h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-600 overflow-hidden mt-2 mr-2 ml-2 rounded-2xl">
+        <img src="images/kabaa.png" alt="Kaaba" class="w-full h-full object-cover">
+        <div class="absolute top-3 left-0 bg-black text-white px-3 py-1 rounded text-sm font-medium">DEPOSIT ONLY £50
+        </div>
+      </div>
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Umrah Package</h3>
+          <div class="flex">
+            <svg class="w-5 h-5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">7 Days 6 Nights</p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 kaaba-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Makkah</p>
+              <p class="text-xs text-gray-600">5 Days</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 mosque-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Madinah</p>
+              <p class="text-xs text-gray-600">4 Days</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span class="text-xs text-gray-600">Flight Economy</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-xs text-gray-600">Visa Transfers</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-xs text-gray-600">Transportation</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <span class="text-xs text-gray-600">Hotels Included</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div><span class="text-2xl font-bold text-gray-800">£500</span><span class="text-sm text-gray-600"> Per
+              person</span></div>
+          <button
+            class="text-black px-7 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            style="background-color: #c1a269;"><i class="fas fa-phone text-black"></i>Call Now</button>
+        </div>
+        <button
+          class="w-full mt-4 border border-yellow-600 text-yellow-600 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors"
+          style="border-color: #c1a269; color: #c1a269;">Details</button>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="bg-white rounded-2xl card-shadow overflow-hidden max-w-sm outline outline-1 outline-offset-2"
+      style="outline-color: #c1a269;">
+      <div
+        class="relative h-48 bg-gradient-to-br from-yellow-400 via-orange-400 to-yellow-600 overflow-hidden mt-2 mr-2 ml-2 rounded-2xl">
+        <img src="images/kabaa.png" alt="Kaaba" class="w-full h-full object-cover">
+        <div class="absolute top-3 left-0 bg-black text-white px-3 py-1 rounded text-sm font-medium">DEPOSIT ONLY £50
+        </div>
+      </div>
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-semibold text-gray-800">Umrah Package</h3>
+          <div class="flex">
+            <svg class="w-5 h-5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+            <svg class="w-5 h-5 ml-0.5 fill-current" style="color: #c1a269;" viewBox="0 0 20 20">
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">7 Days 6 Nights</p>
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 kaaba-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Makkah</p>
+              <p class="text-xs text-gray-600">5 Days</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 mosque-bg rounded"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Madinah</p>
+              <p class="text-xs text-gray-600">4 Days</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            <span class="text-xs text-gray-600">Flight Economy</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="text-xs text-gray-600">Visa Transfers</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 mr-8">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span class="text-xs text-gray-600">Transportation</span>
+          </div>
+          <div class="flex flex-col items-center text-center space-y-1 ml-10">
+            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <span class="text-xs text-gray-600">Hotels Included</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div><span class="text-2xl font-bold text-gray-800">£500</span><span class="text-sm text-gray-600"> Per
+              person</span></div>
+          <button
+            class="text-black px-7 py-2 rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            style="background-color: #c1a269;"><i class="fas fa-phone text-black"></i>Call Now</button>
+        </div>
+        <button
+          class="w-full mt-4 border border-yellow-600 text-yellow-600 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors"
+          style="border-color: #c1a269; color: #c1a269;">Details</button>
+      </div>
+    </div>
+  </div>
+  <!--till here-->
+  <section class="w-full relative mt-[50px] p-0 m-0 border-0 bg-[#c1a269]">
+    <!-- Mobile Carousel (hidden on desktop) -->
+    <div x-data="{ idx: 0, cards: [
+      { title: 'Umrah and Dubai Holidays', desc: 'per person', img1: 'images/img1.jpg', img2: 'images/img3.png', price: '$500', priceDesc: '' },
+      { title: 'Umrah and Egypt Holidays', desc: 'Combine your Umrah with a memorable trip to Egypt.', img1: 'images/img4.jpg', img2: 'images/img2.png', price: '£500', priceDesc: 'Per person' },
+      { title: 'Umrah and Turkey Holidays', desc: 'Enjoy Umrah and explore the wonders of Turkey.', img1: 'images/img6.jpg', img2: 'images/img7.png', price: '£500', priceDesc: 'Per person' }
+    ] }" class="block md:hidden">
+      <!-- Info Box -->
+      <div class="bg-[#c1a269] text-white p-8 flex flex-col justify-center rounded-b-none"
+        style="min-height: 180px; margin-bottom: 0;">
+        <div class="uppercase text-sm tracking-widest font-semibold mb-2">🌙 Halal Holiday</div>
+        <h2 class="text-lg font-bold mb-2 leading-tight">Get Amazing Umrah With Holiday Packages</h2>
+        <p class="text-xs leading-relaxed mb-4">
+          Discover their experiences, reflections, and profound moments that have transformed their lives. Join the
+          countless believers who have found
+        </p>
+        <button class="bg-white text-[#c1a269] font-semibold py-2 px-4 rounded-md w-full text-center">Explore
+          all</button>
+      </div>
+      <!-- Card Carousel -->
+      <div class="relative w-full h-[340px] flex items-center justify-center -mt-8">
+        <template x-for="(card, i) in cards" :key="i">
+          <div x-show="idx === i" class="w-full h-full relative flex flex-col items-center justify-end">
+            <div class="w-full h-[300px] relative overflow-hidden rounded-b-xl">
+              <img :src="card.img1" class="absolute top-0 left-0 w-full h-full object-cover"
+                style="clip-path: polygon(0 0, 100% 0, 0 100%)" />
+              <img :src="card.img2" class="absolute top-0 left-0 w-full h-full object-cover"
+                style="clip-path: polygon(100% 0, 100% 100%, 0 100%)" />
+              <div class="absolute inset-0 bg-black/30"></div>
+              <div class="absolute bottom-6 left-4 right-4 text-white z-10 drop-shadow-lg">
+                <h3 class="text-lg font-bold mb-1" x-text="card.title"></h3>
+                <p class="text-xs mb-2" x-text="card.desc"></p>
+                <p class="font-bold text-lg" x-text="card.price"></p>
+              </div>
+            </div>
+            <button @click="idx = (idx + 1) % cards.length"
+              class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 border border-white rounded-full w-10 h-10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </template>
+      </div>
+    </div>
+    <!-- Desktop Slider (unchanged, hidden on mobile) -->
+    <div class="hidden md:block relative">
+    <!-- Scroll Buttons -->
+    <button onclick="scrollLeft()"
+        class="absolute left-0 top-1/2 -translate-y-1/2 z-20 text-white p-3 rounded-full shadow-md hover:scale-105 transition ml-[430px] outline outline-2 outline-white">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button onclick="scrollRight()"
+      class="absolute right-0 mr-6 top-1/2 -translate-y-1/2 z-20 text-white p-3 rounded-full shadow-md hover:scale-105 transition outline outline-2 outline-white">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <div id="slider" class="flex gap-0 overflow-x-auto no-scrollbar scroll-smooth">
+      <!-- Left Section -->
+        <div
+          class="min-w-[230px] h-[420px] bg-[#c1a269] text-white p-4 flex flex-col justify-center max-w-[400px] mx-auto">
+        <div class="uppercase text-sm tracking-widest font-semibold mb-4 ml-6">🌙 Halal Holiday</div>
+        <h2 class="text-lg font-bold mb-4 leading-tight ml-6">Get Amazing Umrah With<br> Holiday Packages</h2>
+        <p class="text-xs leading-relaxed mb-6 ml-6 mr-6">
+          Discover their experiences, reflections, and profound moments that have transformed their lives. Join the
+          countless believers who have found peace.
+        </p>
+        <button class="bg-white text-[#c1a269] font-semibold py-2 px-4 rounded-md w-[280px] ml-[28px] text-center">
+          Explore all
+        </button>
+      </div>
+      <!-- Cards -->
+      <div onclick="expandCard(this)"
+        class="card relative w-[450px] h-[420px] overflow-hidden group shadow-lg transition-transform duration-500 origin-center">
+        <img src="images/img1.jpg" class="absolute top-0 left-0 w-full h-full object-cover"
+          style="clip-path: polygon(0 0, 100% 0, 0 100%)" />
+        <img src="images/img3.png" class="absolute top-0 left-0 w-full h-full object-cover"
+          style="clip-path: polygon(100% 0, 100% 100%, 0 100%)" />
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="absolute bottom-6 left-6 text-white z-10">
+          <h3 class="text-lg font-semibold">Umrah and Dubai Holidays</h3>
+          <p class="font-bold text-xl mt-1">£500 <span class="text-sm font-normal">Per person</span></p>
+        </div>
+      </div>
+      <div onclick="expandCard(this)"
+        class="card relative w-[450px] h-[420px] overflow-hidden group shadow-lg transition-transform duration-500 origin-center">
+        <img src="images/img4.jpg" class="absolute top-0 left-0 w-full h-full object-cover"
+          style="clip-path: polygon(0 0, 100% 0, 0 100%)" />
+        <img src="images/img2.png" class="absolute top-0 left-0 w-full h-full object-cover"
+          style="clip-path: polygon(100% 0, 100% 100%, 0 100%)" />
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="absolute bottom-6 left-6 text-white z-10">
+          <h3 class="text-lg font-semibold">Umrah and Egypt Holidays</h3>
+          <p class="font-bold text-xl mt-1">£500 <span class="text-sm font-normal">Per person</span></p>
+        </div>
+      </div>
+      <div onclick="expandCard(this)"
+        class="card relative w-[450px] h-[420px] overflow-visible group shadow-lg transition-transform duration-500 origin-center">
+        <img src="images/img6.jpg" class="absolute top-0 left-0 w-full h-full object-cover"
+          style="clip-path: polygon(0 0, 100% 0, 0 100%)" />
+        <img src="images/img7.png" class="absolute top-0 left-0 w-full h-full object-cover"
+          style="clip-path: polygon(100% 0, 100% 100%, 0 100%)" />
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="absolute bottom-6 left-6 text-white z-10">
+          <h3 class="text-lg font-semibold">Umrah and Turkey Holidays</h3>
+          <p class="font-bold text-xl mt-1">£500 <span class="text-sm font-normal">Per person</span></p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full bg-white py-12 overflow-hidden">
+    <h2 class="text-4xl font-serif font-normal text-center mb-10">
+      Top Rated Hotels we Choose for You
+    </h2>
+
+    <!-- Outer wrapper to hide overflow -->
+    <div class="relative w-full overflow-hidden">
+      <!-- Inner scrolling flex container -->
+      <div class="flex animate-scroll w-max gap-10">
+
+        <!-- Hotel logo set - repeated twice -->
+        <div class="flex gap-10">
+      <img src="images/lg1.png" alt="Al Shohada Hotel" class="w-24 h-16 object-contain" />
+      <img src="images/lg2.png" alt="ELAF" class="w-24 h-16 object-contain" />
+      <img src="images/lg3.png" alt="VOCO" class="w-24 h-16 object-contain" />
+      <img src="images/lg4.png" alt="Fairmont" class="w-25 h-16 object-contain" />
+      <img src="images/lg5.png" alt="Makarem" class="w-24 h-16 object-contain" />
+      <img src="images/lg6.png" alt="Swissotel" class="w-24 h-16 object-contain" />
+      <img src="images/lg8.png" alt="Pullman" class="w-24 h-16 object-contain" />
+      <img src="images/lg9.png" alt="Hilton" class="w-25 h-16 object-contain" />
+      <img src="images/lg11.png" alt="Conrad" class="w-25 h-16 object-contain" />
+        </div>
+
+        <!-- Duplicate for seamless looping -->
+        <div class="flex gap-10">
+          <img src="images/lg1.png" alt="Al Shohada Hotel" class="w-24 h-16 object-contain" />
+          <img src="images/lg2.png" alt="ELAF" class="w-24 h-16 object-contain" />
+          <img src="images/lg3.png" alt="VOCO" class="w-24 h-16 object-contain" />
+          <img src="images/lg4.png" alt="Fairmont" class="w-25 h-16 object-contain" />
+          <img src="images/lg5.png" alt="Makarem" class="w-24 h-16 object-contain" />
+          <img src="images/lg6.png" alt="Swissotel" class="w-24 h-16 object-contain" />
+          <img src="images/lg8.png" alt="Pullman" class="w-24 h-16 object-contain" />
+          <img src="images/lg9.png" alt="Hilton" class="w-25 h-16 object-contain" />
+          <img src="images/lg11.png" alt="Conrad" class="w-25 h-16 object-contain" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <section class="py-16 px-4">
+    <section class="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-12 items-start">
+      <!-- Left Side -->
+      <div class="relative flex flex-col items-start min-h-[420px]">
+        <!-- Architect SVG/PNG -->
+        <img src="images/kaba architect.png" alt="Architect"
+          class="absolute -left-32 -top-24 w-[420px] h-[500px] z-0 select-none pointer-events-none" />
+        <!-- Kaaba Door Image (overlapping) -->
+        <div class="relative z-10 w-full flex justify-center">
+          <img src="images/kaaba door.jpg" alt="Kaaba" class="w-[400px] h-72 object-cover rounded-3xl shadow-lg" />
+        </div>
+        <!-- Bottom Row: Mosque + Gold Card -->
+        <div class="flex w-full mt-6 gap-4 z-10">
+          <img src="images/madinah .png" alt="Mosque" class="w-[40%] h-[170px] object-cover rounded-2xl" />
+          <div class="w-[40%] h-[170px] flex flex-col items-center justify-center bg-[#c7a86c] rounded-2xl">
+            <span class="text-white text-3xl font-normal">10<sup class="text-lg align-super">+</sup></span>
+            <span class="text-white text-base mt-2">Years of Experience</span>
+          </div>
+        </div>
+      </div>
+      <!-- Right Side -->
+      <div>
+        <div class="mb-4 flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-[#c7a86c]"></span>
+          <span class="uppercase text-[#c7a86c] font-bold tracking-widest text-sm">About Us</span>
+        </div>
+        <h2 class="font-playfair text-3xl lg:text-4xl font-medium text-gray-800 leading-tight">
+          Making Your Umrah & Hajj Experience Smooth
+        </h2>
+        <p class="text-gray-600 mb-8">
+          From Luxurious accommodations to expert guidance through sacred rituals, we're dedicated to crafting
+          unforgettable journeys that resonate with the essence of your faith. Explore our offerings and embark on a
+          pilgrimage that transcends expectations.
+        </p>
+        <div class="space-y-6">
+          <div class="flex items-start gap-4 mb-8">
+            <span
+              class="inline-block w-6 h-6 rounded-full border-2 border-[#c7a86c] flex-shrink-0 mt-1 flex items-center justify-center">
+              <!-- Tick SVG -->
+              <svg class="w-4 h-4 text-[#c7a86c]" fill="none" stroke="currentColor" stroke-width="3"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div>
+              <div class="text-[#c7a86c] font-semibold text-lg">Expert Guidance</div>
+              <div class="text-gray-600 text-base">
+                Our team of experienced professionals will assist you in every step of your journey, and guided tours in
+                Makkah and Madinah.
+              </div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span
+              class="inline-block w-6 h-6 rounded-full border-2 border-[#c7a86c] flex-shrink-0 mt-1 flex items-center justify-center">
+              <!-- Tick SVG -->
+              <svg class="w-4 h-4 text-[#c7a86c]" fill="none" stroke="currentColor" stroke-width="3"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <div>
+              <div class="text-[#c7a86c] font-semibold text-lg">Tailored Packages</div>
+              <div class="text-gray-600 text-base">
+                We offer customized packages to ensure your pilgrimage fits your personal preferences, schedule, and
+                budget.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+  </section>
+  <section class="py-0 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto mt-[0px]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Content -->
+      <div class="space-y-6">
+        <!-- Services Label -->
+        <div class="flex items-center gap-2 text-[#c1a269] text-sm font-medium mb-2">
+          <span class="text-[#c1a269]">✦</span>
+          <span>OUR BLOGS</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h2 class="font-playfair text-3xl lg:text-4xl font-medium text-gray-800 leading-tight">
+          Tailored To Elevate Your Spiritual Journey
+        </h2>
+
+        <!-- Description -->
+        <p class="text-gray-600 text-lg leading-relaxed">
+          From Luxurious accommodations to expert guidance through sacred rituals, we're dedicated to crafting
+          unforgettable journeys that resonate with the essence of your faith. Explore our offerings and embark on a
+          pilgrimage that transcends expectations.
+        </p>
+
+        <!-- Learn More Button -->
+        <div class="pt-4">
+          <button
+            class="bg-[#c1a269] hover:bg-amber-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2">
+            <span>Learn More</span>
+            <i class="fas fa-arrow-right text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Content - Image -->
+      <div class="relative">
+        <!-- Main Image -->
+        <div class="relative z-0 rounded-2xl overflow-hidden shadow-2xl">
+          <img src="images/interior.png" alt="Beautiful Islamic Architecture with Arches"
+            class="w-full h-[370px] md:h-[470px] object-cover">
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Cards Row Below -->
+    <!-- Mobile Carousel -->
+    <div x-data="{ idx: 0, cards: [
+      { title: 'Best Hotels', icon: 'fas fa-hotel', desc: 'Experience world-class amenities, breathtaking views, and impeccable service, ensuring that your stay is nothing short of extraordinary.' },
+      { title: 'Guarantee Quality Tour', icon: 'fas fa-shield-alt', desc: 'Trust in Dome Tours commitment knowledgeable guides and seamless logistics, embark on a journey of spiritual enlightenment with confidence.' },
+      { title: 'Easy Transfer', icon: 'fas fa-exchange-alt', desc: 'Seamlessly navigate to relax and enjoy the journey as we take care of all the logistics, allowing you to focus on the sacred experience ahead.' },
+      { title: '24/7 Assistance', icon: 'fas fa-headset', desc: 'Enjoy peace of mind knowing with Dome Tours, support is always within reach, ensuring that your spiritual journey is smooth and worry-free.' }
+    ] }" class="block sm:hidden relative z-10 mt-8">
+      <div class="relative w-full flex items-center justify-center">
+        <button @click="idx = (idx - 1 + cards.length) % cards.length"
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-md z-10">
+          <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <template x-for="(card, i) in cards" :key="i">
+          <div x-show="idx === i" class="w-full">
+            <div
+              class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 outline outline-1 outline-gray-300 mx-2 transition-all duration-300">
+              <div class="flex items-start justify-between mb-4">
+                <h3 class="font-semibold text-gray-900 text-lg" x-text="card.title"></h3>
+                <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <i :class="card.icon + ' text-gray-600 text-sm'"></i>
+                </div>
+              </div>
+              <p class="text-gray-600 text-sm leading-relaxed" x-text="card.desc"></p>
+            </div>
+          </div>
+        </template>
+        <button @click="idx = (idx + 1) % cards.length"
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-md z-10">
+          <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Dots -->
+      <div class="flex justify-center mt-4 gap-2">
+        <template x-for="(card, i) in cards" :key="i">
+          <button @click="idx = i" :class="{'bg-[#c1a269]': idx === i, 'bg-gray-300': idx !== i }"
+            class="w-2.5 h-2.5 rounded-full transition-colors"></button>
+        </template>
+      </div>
+    </div>
+    <!-- Desktop/Tablet Grid -->
+    <div class="relative z-10 hidden sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6  -mt-[35px]">
+      <!-- Best Hotels Card -->
+      <div
+        class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 outline outline-1 outline-gray-300">
+        <div class="flex items-start justify-between mb-4">
+          <h3 class="font-semibold text-gray-900 text-lg">Best Hotels</h3>
+          <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+            <i class="fas fa-hotel text-gray-600 text-sm"></i>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Experience world-class amenities, breathtaking views, and impeccable service, ensuring that your stay is
+          nothing short of extraordinary.
+        </p>
+      </div>
+      <!-- Guarantee Quality Tour Card -->
+      <div
+        class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 outline outline-1 outline-gray-300">
+        <div class="flex items-start justify-between mb-4">
+          <h3 class="font-semibold text-gray-900 text-lg">Guarantee Quality Tour</h3>
+          <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+            <i class="fas fa-shield-alt text-gray-600 text-sm"></i>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Trust in Dome Tours commitment knowledgeable guides and seamless logistics, embark on a journey of spiritual
+          enlightenment with confidence.
+        </p>
+      </div>
+      <!-- Easy Transfer Card -->
+      <div
+        class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 outline outline-1 outline-gray-300">
+        <div class="flex items-start justify-between mb-4">
+          <h3 class="font-semibold text-gray-900 text-lg">Easy Transfer</h3>
+          <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+            <i class="fas fa-exchange-alt text-gray-600 text-sm"></i>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Seamlessly navigate to relax and enjoy the journey as we take care of all the logistics, allowing you to focus
+          on the sacred experience ahead.
+        </p>
+      </div>
+      <!-- 24/7 Assistance Card -->
+      <div
+        class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 outline outline-1 outline-gray-300">
+        <div class="flex items-start justify-between mb-4">
+          <h3 class="font-semibold text-gray-900 text-lg">24/7 Assistance</h3>
+          <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+            <i class="fas fa-headset text-gray-600 text-sm"></i>
+          </div>
+        </div>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Enjoy peace of mind knowing with Dome Tours, support is always within reach, ensuring that your spiritual
+          journey is smooth and worry-free.
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="max-w-6xl mx-auto px-4 py-16 mt-6">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between mb-12">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-3 h-3 bg-[#c1a269] transform rotate-45"></div>
+          <span class="text-[#c1a269] font-inter font-medium text-sm tracking-wider uppercase">TESTIMONIALS</span>
+        </div>
+        <h2 class="font-playfair text-3xl lg:text-4xl font-medium text-gray-800 leading-tight">
+          Hear What Our Travelers Say With Their<br>
+          Spiritual Journey
+        </h2>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="flex gap-2">
+        <button
+          class="w-12 h-12 rounded-full border-2 border-[#c1a269] flex items-center justify-center text-yellow-600 hover:bg-yellow-600 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <button
+          class="w-12 h-12 rounded-full border-2 border-[#c1a269] flex items-center justify-center text-yellow-600 hover:bg-yellow-600 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Testimonial Card -->
+    <div class="bg-[#f6f1e9] rounded-2xl p-8 lg:p-12 shadow-sm">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <!-- Quote Marks -->
+        <div class="flex-shrink-0">
+          <span class="quote-marks">&ldquo;</span>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1">
+          <!-- Star Rating -->
+          <div class="flex gap-1 mb-6">
+            <span class="star text-xl">★</span>
+            <span class="star text-xl">★</span>
+            <span class="star text-xl">★</span>
+            <span class="star text-xl">★</span>
+            <span class="star text-xl">★</span>
+          </div>
+
+          <!-- Testimonial Text -->
+          <p class="font-inter text-gray-600 text-lg leading-relaxed mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non lorem congue, aliquet ex sed, molestie
+            ligula. Duis non mi metus. Curabitur feugiat nisl quis lorem gravida tristique. Morbi ex velit, lacinia ac
+            diam eu, maximus posuere purus. In eget dignissim lectus. Donec mauris nunc, vulputate a felis sed.
+          </p>
+
+          <!-- Author Info -->
+          <div class="flex items-center gap-4">
+            <!-- Profile Image -->
+            <div class="w-12 h-12 rounded-full bg-teal-400 flex items-center justify-center">
+              <div class="w-10 h-10 rounded-full bg-teal-500"></div>
+            </div>
+
+            <!-- Google Logo -->
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" viewBox="0 0 24 24">
+                <path fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+              </svg>
+
+              <div>
+                <div class="font-inter font-medium text-gray-800">Aisyah Nazwa</div>
+                <div class="font-inter text-sm text-gray-500">Designation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <div class="flex items-center gap-2 text-[#c1a269] text-sm font-medium mb-2">
+          <span class="text-[#c1a269]">✦</span>
+          <span>OUR BLOGS</span>
+        </div>
+        <h2 class="text-3xl font-medium text-gray-900">
+          Blogs & News For Your<br>
+          Spiritual Journey
+        </h2>
+      </div>
+      <button
+        class="p-2 rounded-full border border-[#c1a269] hover:bg-gray-100 transition-colors hidden md:inline-flex">
+        <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Blog Cards Grid/Carousel -->
+    <div x-data="{ idx: 0, cards: [0,1,2] }" class="relative">
+      <!-- Mobile Carousel Controls -->
+      <div class="flex justify-between items-center mb-4 md:hidden">
+        <button @click="idx = idx === 0 ? cards.length - 1 : idx - 1"
+          class="p-2 rounded-full border border-[#c1a269] hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <div class="flex gap-1">
+          <template x-for="i in cards.length">
+            <div :class="{'bg-[#c1a269]': idx === i-1, 'bg-gray-300': idx !== i-1}" class="w-2 h-2 rounded-full"></div>
+          </template>
+        </div>
+        <button @click="idx = idx === cards.length - 1 ? 0 : idx + 1"
+          class="p-2 rounded-full border border-[#c1a269] hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Carousel for Mobile -->
+      <div class="md:hidden">
+        <template x-if="idx === 0">
+      <div
+        class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+        <div
+          class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+          <img src="images/blog1.png" alt="Kaaba in Mecca" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Umrah in Ramadan holds a special place, know why?
+          </h3>
+          <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+              <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in.
+                Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac,
+                gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+          <button
+                class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read
+                Now</button>
+        </div>
+      </div>
+        </template>
+        <template x-if="idx === 1">
+          <div
+            class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+            <div
+              class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+              <img src="images/blog2.jpg" alt="Kaaba at night" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 2</h3>
+              <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+              <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in.
+                Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac,
+                gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+              <button
+                class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read
+                Now</button>
+            </div>
+          </div>
+        </template>
+        <template x-if="idx === 2">
+          <div
+            class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+            <div
+              class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+              <img src="images/blog3.jpg" alt="Kaaba with intricate details" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 3</h3>
+              <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+              <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in.
+                Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac,
+                gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+              <button
+                class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read
+                Now</button>
+            </div>
+          </div>
+        </template>
+      </div>
+      <!-- Grid for Desktop -->
+      <div class="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <!-- Blog Card 1 -->
+        <div
+          class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+          <div
+            class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+            <img src="images/blog1.png" alt="Kaaba in Mecca" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Umrah in Ramadan holds a special place, know why?</h3>
+            <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in.
+              Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac,
+              gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+            <button
+              class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read
+              Now</button>
+          </div>
+        </div>
+      <!-- Blog Card 2 -->
+      <div
+        class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+        <div
+          class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+          <img src="images/blog2.jpg" alt="Kaaba at night" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 2</h3>
+          <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in.
+              Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac,
+              gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+          <button
+              class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read
+              Now</button>
+        </div>
+      </div>
+      <!-- Blog Card 3 -->
+      <div
+        class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+        <div
+          class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+          <img src="images/blog3.jpg" alt="Kaaba with intricate details" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 3</h3>
+          <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in.
+              Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac,
+              gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+          <button
+              class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read
+              Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- JS for Scroll Buttons -->
+
+  <script>
+    const slider = document.getElementById('slider');
+
+    function scrollLeft() {
+      slider.scrollBy({ left: -450, behavior: 'smooth' });
+    }
+
+    function scrollRight() {
+      slider.scrollBy({ left: 450, behavior: 'smooth' });
+    }
+
+    function expandCard(card) {
+      document.querySelectorAll('.card').forEach(c => {
+        c.style.transform = 'scaleY(1)';
+      });
+
+      if (card.style.transform === 'scaleY(1.3)') {
+        card.style.transform = 'scaleY(1)';
+      } else {
+        card.style.transform = 'scaleY(1.3)';
+      }
+    }
+
+    // Add some interactivity to the dropdown
+    document.querySelector('button').addEventListener('click', function () {
+      this.classList.toggle('dropdown-open');
+    });
+
+    // Add click handlers for duration buttons
+    document.querySelectorAll('.flex.items-center.gap-4 button').forEach(button => {
+      button.addEventListener('click', function () {
+        // Remove active class from all buttons
+        document.querySelectorAll('.flex.items-center.gap-4 button').forEach(btn => {
+          btn.classList.remove('bg-green-700', 'text-white');
+          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+        });
+
+        // Add active class to clicked button
+        this.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+        this.classList.add('bg-green-700', 'text-white');
+      });
+    });
+
+    // Add click handlers for star rating filters
+    document.querySelectorAll('.flex.items-center.gap-6 > div').forEach(rating => {
+      rating.addEventListener('click', function () {
+        // Remove active class from all ratings
+        document.querySelectorAll('.flex.items-center.gap-6 > div').forEach(r => {
+          r.classList.remove('bg-green-700', 'text-white');
+          r.classList.add('bg-white', 'border', 'border-gray-300');
+          r.querySelectorAll('svg').forEach(star => {
+            star.classList.remove('text-white');
+            star.classList.add('text-green-700');
+          });
+        });
+
+        // Add active class to clicked rating
+        this.classList.remove('bg-white', 'border', 'border-gray-300');
+        this.classList.add('bg-green-700', 'text-white');
+        this.querySelectorAll('svg').forEach(star => {
+          star.classList.remove('text-green-700');
+          star.classList.add('text-white');
+        });
+      });
+    });
+  </script>
+
+  <!-- FAQ Section Below Blog Section -->
+  <section class="bg-[#f8f5ef] py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-playfair text-3xl lg:text-4xl font-medium text-gray-800 leading-tight text-center">Everything You
+        Need to Know About<br>Umrah and Payment</h2>
+      <p class="text-center text-gray-500 mb-10">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec
+        mattis lectus quam pretium amet facilisis.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div class="space-y-4">
+          <!-- Accordion Item 1 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border border-[#c1a269] bg-[#f8f5ef]  text-[#c1a269] font-medium flex justify-between items-center focus:outline-none">
+              What is the difference between Hajj and Umrah?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm">
+              Hajj is a mandatory pilgrimage performed once a year during specific dates in the Islamic month of Dhu
+              al-Hijjah, while Umrah is a voluntary pilgrimage that can be performed at any time of the year.
+            </div>
+          </div>
+          <!-- Accordion Item 2 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef] text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              What documents are required for Umrah?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              You will need a valid passport, visa, and proof of vaccination. Additional documents may be required
+              depending on your country of residence.
+            </div>
+          </div>
+          <!-- Accordion Item 3 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef]  text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              How can I make payment for my Umrah package?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              Payments can be made via bank transfer, credit card, or other methods as specified by your travel agency.
+            </div>
+          </div>
+          <!-- Accordion Item 4 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef] text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              Can I book Umrah for my family?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              Yes, you can book Umrah packages for your entire family, including children and elderly members.
+            </div>
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="space-y-4">
+          <!-- Accordion Item 5 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef] text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              What is included in the Umrah package?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              Packages typically include flights, accommodation, visa processing, and ground transportation.
+            </div>
+          </div>
+          <!-- Accordion Item 6 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef]  text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              Are there any age restrictions for Umrah?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              There are no strict age restrictions, but children and elderly travelers should be accompanied by family
+              members.
+            </div>
+          </div>
+          <!-- Accordion Item 7 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef] text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              How long does the Umrah process take?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              The duration varies, but most packages last between 7 to 14 days.
+            </div>
+          </div>
+          <!-- Accordion Item 8 -->
+          <div class="border rounded-md" style="border-color: #e5e1d8;">
+            <button type="button"
+              class="w-full text-left px-6 py-3 rounded-md border bg-[#f8f5ef]  text-gray-700 font-medium flex justify-between items-center focus:outline-none">
+              Can I customize my Umrah package?
+              <span class="ml-2">&#8964;</span>
+            </button>
+            <div class="px-6 pb-4 pt-2 text-gray-700 text-sm hidden">
+              Yes, many agencies offer customizable packages to suit your preferences and budget.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Simple accordion toggle for the new FAQ section
+    const faqButtons = document.querySelectorAll('section:last-of-type button');
+    faqButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const content = this.nextElementSibling;
+        if (content.classList.contains('hidden')) {
+          // Close all
+          document.querySelectorAll('section:last-of-type button + div').forEach(div => div.classList.add('hidden'));
+          document.querySelectorAll('section:last-of-type button').forEach(b => {
+            b.classList.remove('bg-[#f8f5ef]', 'text-[#c1a269]', 'border-[#c1a269]');
+            b.classList.add('bg-white', 'text-gray-700');
+          });
+          // Open this
+          content.classList.remove('hidden');
+          this.classList.add('bg-[#f8f5ef]', 'text-[#c1a269]', 'border-[#c1a269]');
+          this.classList.remove('bg-white', 'text-gray-700');
+        } else {
+          content.classList.add('hidden');
+          this.classList.remove('bg-[#f8f5ef]', 'text-[#c1a269]', 'border-[#c1a269]');
+          this.classList.add('bg-white', 'text-gray-700');
+        }
+      });
+    });
+  </script>
+
+  <!-- Customize Package Section Below FAQ -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <!-- Left Side -->
+      <div class="pl-4 md:pl-0">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-[#c1a269] text-lg">✦</span>
+          <span class="uppercase text-[#c1a269] font-medium tracking-widest text-sm">Customize</span>
+        </div>
+        <h2 class="font-playfair text-3xl lg:text-4xl font-medium text-gray-800 leading-tight mb-4">Let Our Experts
+          Create The Perfect Package For You</h2>
+        <p class="text-gray-600 mb-8 max-w-md">Whether you're planning a spiritual Umrah journey or want to combine it
+          with a relaxing holiday — we've got you covered.</p>
+        <img src="images/consult.jpg" alt="Expert Consultation" class="rounded-xl w-full max-w-md">
+      </div>
+      <!-- Right Side -->
+      <div class="bg-white rounded-xl border border-[#c1a269] p-8 shadow-sm max-w-md mx-auto">
+        <h3 class="font-playfair text-xl font-medium text-gray-800 mb-6">Choose Your Journey Type</h3>
+        <div class="flex items-start justify-between mb-6">
+          <div class="flex flex-col gap-4 mt-2">
+          <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="journey" class="accent-[#005E38]" checked>
+            <span class="text-gray-800">Umrah Only</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="journey" class="accent-[#005E38]">
+            <span class="text-gray-800">Umrah with Holiday Extension</span>
+          </label>
+          </div>
+          <div class="flex flex-col items-end ml-8 mt-[-12px]">
+            <img src="images/clip.png" alt="Clip" class="w-7 h-7 mb-1">
+            <img src="images/kabaa logo.png" alt="Kaaba" class="w-12 h-12">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm mb-1">Departure City</label>
+          <input type="text" placeholder="Demo"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-[#c1a269] bg-white">
+        </div>
+        <div class="flex gap-4 mb-4">
+          <div class="flex-1">
+            <label class="block text-gray-700 text-sm mb-1">No. Of Pax</label>
+            <input type="text" placeholder="2"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-[#c1a269] bg-white">
+          </div>
+          <div class="flex-1">
+            <label class="block text-gray-700 text-sm mb-1">Hotel Preference</label>
+            <input type="text" placeholder="3 Stars"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-[#c1a269] bg-white">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm mb-1">Departure dates <span class="text-xs text-gray-400">( Select
+              Any )</span></label>
+          <div class="flex gap-2">
+            <button class="flex-1 py-2 rounded-md bg-gray-200 text-gray-700 font-medium">Fixed</button>
+            <button class="flex-1 py-2 rounded-md bg-gray-200 text-gray-700 font-medium">Flexible</button>
+            <button class="flex-1 py-2 rounded-md bg-gray-200 text-gray-700 font-medium">Anytime</button>
+          </div>
+        </div>
+        <button
+          class="w-full mt-6 py-3 rounded-md bg-[#c1a269] text-white font-medium text-lg hover:bg-[#b8955c] transition-colors">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="w-full bg-white py-12 overflow-hidden">
+    <h2 class="text-4xl font-serif font-normal text-center mb-10">Airlines</h2>
+
+    <!-- Outer wrapper hides overflow -->
+    <div class="relative w-full overflow-hidden">
+      <!-- Scrolling container -->
+      <div class="flex animate-scroll w-max gap-10">
+
+        <!-- Logo Set - repeated twice for seamless loop -->
+        <div class="flex gap-10">
+      <img src="images/alg1.png" alt="Al Shohada Hotel" class="w-24 h-16 object-contain" />
+      <img src="images/alg2.png" alt="ELAF" class="w-24 h-16 object-contain" />
+      <img src="images/alg3.png" alt="VOCO" class="w-34 h-16 object-contain" />
+      <img src="images/alg4.png" alt="Fairmont" class="w-25 h-16 object-contain" />
+      <img src="images/alg5.png" alt="Makarem" class="w-24 h-16 object-contain" />
+      <img src="images/alg6.png" alt="Swissotel" class="w-24 h-16 object-contain" />
+      <img src="images/alg8.png" alt="Pullman" class="w-24 h-16 object-contain" />
+      <img src="images/alg7.png" alt="Hilton" class="w-25 h-16 object-contain" />
+      <img src="images/alg11.png" alt="Conrad" class="w-25 h-16 object-contain" />
+    </div>
+
+        <!-- Duplicate set for infinite loop -->
+        <div class="flex gap-10">
+          <img src="images/alg1.png" alt="Al Shohada Hotel" class="w-24 h-16 object-contain" />
+          <img src="images/alg2.png" alt="ELAF" class="w-24 h-16 object-contain" />
+          <img src="images/alg3.png" alt="VOCO" class="w-34 h-16 object-contain" />
+          <img src="images/alg4.png" alt="Fairmont" class="w-25 h-16 object-contain" />
+          <img src="images/alg5.png" alt="Makarem" class="w-24 h-16 object-contain" />
+          <img src="images/alg6.png" alt="Swissotel" class="w-24 h-16 object-contain" />
+          <img src="images/alg8.png" alt="Pullman" class="w-24 h-16 object-contain" />
+          <img src="images/alg7.png" alt="Hilton" class="w-25 h-16 object-contain" />
+          <img src="images/alg11.png" alt="Conrad" class="w-25 h-16 object-contain" />
+  </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="relative bg-[#181715] text-white h-auto min-h-[650px] md:min-h-0 md:h-[650px]"
+    style="background-image: url('images/footer\ bg.png'); background-size: cover; background-position: center;">
+    <!-- Wave Design -->
+    <div class="relative">
+      <svg class="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none" style="transform: rotate(180deg);">
+        <path d="M0,0 C150,60 350,60 600,30 C850,0 1050,60 1200,30 L1200,120 L0,120 Z" fill="white"></path>
+      </svg>
+    </div>
+    <div class="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <!-- Top Section -->
+      <div class="relative flex flex-col sm:grid sm:grid-cols-1 md:grid-cols-4 sm:gap-8 mb-8 gap-4 flex-row">
+        <!-- Logo Section -->
+        <div class="flex flex-col items-start md:items-start justify-center mb-4 md:mb-0 w-full">
+          <div class="flex items-start mb-6 justify-start md:justify-start w-full">
+            <img src="images/logo3.png" alt="Al Haramain Logo" class="h-[70px] md:h-[100px] mr-0 md:mr-4" />
+          </div>
+          <!-- Certification Logos -->
+          <div class="flex flex-wrap items-center justify-start md:justify-start gap-2 md:gap-4 mb-6 w-full">
+            <img src="images/logo2.png" class="h-10 md:h-12" alt="IATA" />
+
+          </div>
+        </div>
+        <!-- Help & Support -->
+        <div class="flex flex-col items-start md:items-center justify-center md:ml-24 w-full">
+          <h4 class="text-[#c1a269] font-semibold mb-4 text-left w-full md:ml-[50px]">Help & Support</h4>
+          <ul class="space-y-2 text-gray-400 text-left md:text-left w-full md:ml-[50px]">
+            <li><a href="#" class="hover:text-white transition">Blogs</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms and Conditions</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Visa Information</a></li>
+          </ul>
+        </div>
+        <!-- Trust Badges -->
+        <div class="flex flex-col items-end md:items-end justify-center gap-1 md:col-span-2 w-full
+                    absolute right-4 top-0 sm:static sm:right-auto sm:top-auto ">
+          <div class="flex flex-wrap gap-2 justify-end md:justify-end md:ml-12 w-full md:mr-[170px] mt-[200px] sm:mt-0">
+            <img src="images/footer icon 1.jpg" class="h-10 md:h-12" alt="GDPR" />
+            <img src="images/footer icon 2.jpg" class="h-10 md:h-12" alt="100%" />
+            <img src="images/footer icon3.jpg" class="h-10 md:h-12" alt="Award" />
+            <img src="images/footer icon 4.jpg" class="h-10 md:h-12" alt="GeoTrust" />
+          </div>
+        </div>
+      </div>
+      <!-- Bottom Section -->
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col gap-8 sm:grid sm:grid-cols-1 md:grid-cols-3 sm:gap-8">
+          <!-- Contact -->
+          <div class="flex flex-col items-start md:items-start text-left md:text-left w-full -mt-10 sm:mt-0">
+            <h4 class="text-[#c1a269] font-semibold mb-4 text-left w-full">Contact</h4>
+            <div class="space-y-3 text-gray-400 w-full">
+              <div class="flex flex-col items-start md:flex-row md:items-start gap-2 md:gap-0 w-full">
+                <i class="fas fa-map-marker-alt text-[#c1a269] mr-0 md:mr-3 mt-1"></i>
+                <div>
+                  <p>Office 18, College Rd, Whalley Range, Manchester</p>
+                  <p>M16 8BP</p>
+                </div>
+              </div>
+              <div class="flex flex-col items-start md:flex-row md:items-center gap-2 md:gap-0 w-full">
+                <i class="fas fa-phone text-[#c1a269] mr-0 md:mr-3"></i>
+                <p>0203 062 8926</p>
+              </div>
+              <div class="flex flex-col items-start md:flex-row md:items-center gap-2 md:gap-0 w-full">
+                <i class="fas fa-envelope text-[#c1a269] mr-0 md:mr-3"></i>
+                <p>info@alharamaintravel.co.uk</p>
+              </div>
+            </div>
+          </div>
+          <!-- Payment Methods and Follow Us -->
+          <div
+            class="flex flex-col items-start md:items-start justify-between gap-4 ml-0 md:ml-[400px] w-full -mt-6 sm:mt-0">
+            <div class="flex flex-col items-start md:items-start mb-4 w-full">
+              <h4 class="text-[#c1a269] font-semibold mb-2 text-left w-full">Payment method</h4>
+              <div class="flex flex-nowrap justify-start gap-2 mb-4 w-full">
+                <img src="images/visa.webp" class="h-6" alt="Visa" />
+                <img src="images/visa.webp" class="h-6" alt="Visa" />
+                <img src="images/mastercard.png" class="h-6" alt="Mastercard" />
+                <img src="images/mastercard.png" class="h-6" alt="Mastercard" />
+                <img src="images/paypal.png" class="h-6" alt="Paypal" />
+              </div>
+              <h4 class="text-[#c1a269] font-semibold mb-2 text-left w-full -mt-4 sm:mt-0 ">Follow Us</h4>
+              <div class="flex justify-start md:justify-start gap-2 w-full">
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-instagram"></i></a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-facebook-f"></i></a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </footer>
+</body>
+
+</html>

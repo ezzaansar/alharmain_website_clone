@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    .glass {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #374151;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #6B7280;
+        border-radius: 2px;
+    }
+     .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-open .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .kaaba-bg {
+            background-image: url('images/kaba\ logo.jpg');
+            background-size: 42px 42px;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+
+        .mosque-bg {
+            background-image: url('images/madinah.png');
+            background-size: 42px 42px;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .experience-box {
+            background: linear-gradient(135deg, #d4af37, #c9b037);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .kaaba-image {
+            background: linear-gradient(135deg, #2c1810, #4a2c17);
+            background-image:
+                radial-gradient(circle at 30% 40%, #d4af37 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, #d4af37 1px, transparent 1px);
+        }
+
+        .mosque-interior {
+            background: linear-gradient(135deg, #6b4423, #8b5a2b);
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.1) 10px, rgba(212, 175, 55, 0.1) 20px);
+        }
+
+        .crowd-image {
+            background: linear-gradient(135deg, #4a4a4a, #6a6a6a);
+            background-image:
+                radial-gradient(circle at 20% 20%, #d4af37 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, #d4af37 1px, transparent 1px);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .quote-marks {
+            font-size: 4rem;
+            line-height: 1;
+            color: #c1a269;
+            font-family: Georgia, serif;
+        }
+
+        .star {
+            color: #c1a269;
+        }
+
+        @keyframes scrollInfinite {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scrollInfinite 30s linear infinite;
+        }
+
+        @keyframes scrollInfinite {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scrollInfinite 30s linear infinite;
+        }
+</style>
+
+<body>
+    <!-- Mobile Top Navbar: All logos in one row -->
+    <div class="w-full border-b bg-white py-2 px-2 flex items-center justify-between gap-2 sm:hidden">
+        <img src="images/logo3.png" class="h-14 w-35 rounded-lg bg-white p-1 shadow" alt="Kaaba" />
+        <img src="images/logo2.png" class="h-8" alt="IATA" />
+        <img src="images/logo1.png" class="h-8" alt="Trustpilot" />
+        <button class="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center"><i
+                class="fab fa-whatsapp text-white text-2xl"></i></button>
+        <button class="w-10 h-10 bg-[#c1a269] rounded-lg flex items-center justify-center"><i
+                class="fas fa-phone-alt text-white text-2xl"></i></button>
+    </div>
+    <!-- Mobile Main Navbar: Home and Hamburger (under logo row) -->
+    <div x-data="{ open: false }" class="w-full bg-black bg-opacity-80 flex flex-col sm:hidden">
+        <div class="flex items-center justify-between px-4 py-2">
+            <span class="text-white text-2xl font-normal">Contact</span>
+            <button @click="open = !open"><i class="fas fa-bars text-white text-3xl"></i></button>
+        </div>
+        <div x-show="open" @click.away="open = false" class="flex flex-col gap-2 px-4 pb-4 animate-fade-in"
+            style="display: none;">
+            <a href="index.html" class="text-white text-lg py-1">Home</a>
+            <a href="packagesdetail.html" class="text-white text-lg py-1">Umrah Packages</a>
+            <a href="packageslisting.html" class="text-white text-lg py-1">Hajj 2025</a>
+            <a href="holidays.html" class="text-white text-lg py-1">Umrah and Holiday</a>
+            <a href="blogsdetail.html" class="text-white text-lg py-1">Umrah Info</a>
+            <a href="contact.html" class="text-white text-lg py-1">Contact Us</a>
+            <a href="beatmyprice.html" class="text-white text-lg py-1">Beat my prize</a>
+        </div>
+    </div>
+
+
+
+    <!-- Desktop Top Navbar -->
+    <div class="w-full border-b bg-white py-3 px-2 sm:px-4 md:px-8 hidden sm:block">
+        <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+
+            <!-- Logo + Trust -->
+            <div class="flex flex-col md:flex-row items-center md:gap-14 w-full md:w-auto">
+                <!-- Logo -->
+                <div class="flex justify-center md:justify-start items-center gap-4 md:gap-6 md:ml-20">
+                    <img src="images/logo3.png" class="h-[70px] w-[140px] sm:h-[100px] sm:w-[220px]" alt="Kaaba" />
+                </div>
+                <!-- Trust Badges -->
+                <div class="flex justify-center md:justify-start items-center gap-6 md:gap-14 mt-2 md:mt-0 md:ml-20">
+                    <img src="images/logo2.png" class="h-7 sm:h-9" alt="IATA" />
+                    <img src="images/logo1.png" class="h-8 sm:h-11" alt="Trustpilot" />
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div
+                class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full md:w-auto md:justify-end mt-2 md:mt-0">
+                <!-- WhatsApp -->
+                <div class="flex items-center gap-2">
+                    <div class="bg-green-700 text-white p-2 rounded-md">
+                        <i class="fab fa-whatsapp text-2xl sm:text-3xl"></i>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-xs sm:text-sm text-gray-500">WhatsApp:</p>
+                        <p class="font-bold text-green-700 text-sm sm:text-base">0203 062 8926</p>
+                    </div>
+                </div>
+
+                <!-- Call Now -->
+                <div class="flex items-center gap-2 md:mr-20">
+                    <div class="bg-[#c7a86c] text-white p-2 rounded-md">
+                        <i class="fas fa-phone-alt text-xl sm:text-2xl"></i>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-xs sm:text-sm text-gray-500">Call Now:</p>
+                        <p class="font-bold text-yellow-500 text-sm sm:text-base">0203 062 8926</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Image Section -->
+    <div class="relative w-full h-[220px] md:h-[500px] flex items-center justify-center mb-[12px] md:mb-0"
+        style="background-image: url('images/contact\ us.jpg'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black bg-opacity-30">
+            <!-- Navbar -->
+            <nav class="w-full glass border-t border-gray-300 shadow-sm z-20 relative hidden sm:block">
+                <div class="max-w-screen-xl mx-auto flex items-center justify-center px-4 md:px-8">
+                    <ul class="flex flex-wrap items-center gap-6 md:gap-10 py-8 font-medium text-white">
+                        <li><a href="index.html" class="hover:text-[#c1a269] transition-colors duration-200">Home</a></li>
+                        <li class="relative group">
+                            <button class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+                                Umrah Packages
+                                <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <ul class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+                                <li><a href="packageslisting.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Economy Umrah</a></li>
+                                <li><a href="packageslisting.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Premium Umrah</a></li>
+                                <li><a href="packageslisting.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">VIP Umrah</a></li>
+                            </ul>
+                        </li>
+                        <li class="relative group">
+                            <button class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+                                Hajj 2025
+                                <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <ul class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+                                <li><a href="packagesdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Economy Hajj</a></li>
+                                <li><a href="packagesdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Premium Hajj</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="holidays.html" class="hover:text-[#c1a269] transition-colors duration-200">Umrah and Holiday</a></li>
+                        <li class="relative group">
+                            <button class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+                                Umrah Info
+                                <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <ul class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+                                <li><a href="blogsdetail.html" class="block px-4 py-2 hover:bg-[#c1a269]  hover:text-black">Visa Info</a></li>
+                                <li><a href="blogsdetail.html" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Travel Guide</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html" class="hover:text-[#c1a269] transition-colors duration-200">Contact Us</a></li>
+                        <li><a href="beatmyprice.html" class="hover:text-[#c1a269] transition-colors duration-200">Beat my prize</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-start justify-center w-full h-full pl-8 md:pl-20">
+            <h1
+                class="text-white text-3xl md:text-5xl font-serif font-medium mb-2 text-left md:ml-[150px] md:mt-[50px]">
+                Contact Us</h1>
+         
+            </div>
+        </div>
+
+    </div>
+    <section class="py-20 px-6 bg-white">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+    <!-- Left Side: Contact Info -->
+    <div class="space-y-6">
+      <div class="flex items-center gap-2 text-[#c1a269] font-semibold text-sm uppercase tracking-wide">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="12" fill="#c1a269" />
+        </svg>
+        Get In Touch
+      </div>
+      <h2 class="text-3xl md:text-4xl font-serif font-medium text-gray-900 leading-snug">
+        Have Questions About Our Travel Packages For Umrah And Hajj?
+      </h2>
+      <p class="text-gray-600 text-base leading-relaxed max-w-md">
+        Whether you need assistance with itinerary customization, accommodation preferences, or general inquiries about your pilgrimage, we're just a message away. Reach out to us today to begin your transformative journey.
+      </p>
+
+      <div class="space-y-4 text-sm text-gray-800">
+        <div class="flex items-start gap-3">
+          <i class="fas fa-map-marker-alt text-[#c1a269] mt-1"></i>
+          <p>Office 18, College Rd, Whalley Range, Manchester M16 8BP</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="fas fa-globe text-[#c1a269] mt-1"></i>
+          <p>www.alharamaintravel.co.uk</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="fas fa-envelope text-[#c1a269] mt-1"></i>
+          <p>Info@alharamaintravel.co.uk</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="fas fa-phone-alt text-[#c1a269] mt-1"></i>
+          <p>+44 208 164 3111</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <i class="fas fa-phone-alt text-[#c1a269] mt-1"></i>
+          <p>0203 062 8926</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Contact Form -->
+    <div class="bg-[#c1a269] rounded-xl p-8 shadow-lg" style="background-image: url('/images/pattern.jpg'); background-size: cover; background-blend-mode: overlay;">
+      <h3 class="text-white text-xl font-semibold mb-2">Send A Message</h3>
+      <p class="text-white text-sm mb-6">Please feel free to contact us we will get back to you as soon as possible.</p>
+      <form class="space-y-4">
+        <div>
+          <label class="block text-white text-sm mb-1">Full Name</label>
+          <input type="text" placeholder="Aaleen" class="w-full px-4 py-2 rounded-md bg-white text-gray-800 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-white text-sm mb-1">Email Address</label>
+            <input type="email" placeholder="Aaleen" class="w-full px-4 py-2 rounded-md bg-white text-gray-800 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-white text-sm mb-1">Contact Number</label>
+            <input type="tel" placeholder="000 0000 000" class="w-full px-4 py-2 rounded-md bg-white text-gray-800 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-white text-sm mb-1">Message</label>
+          <textarea rows="4" placeholder="Aaleen" class="w-full px-4 py-2 rounded-md bg-white text-gray-800 focus:outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-black text-white py-2 rounded-md mt-2 hover:bg-gray-900 transition duration-300">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+<footer class="relative bg-[#181715] text-white h-auto min-h-[650px] md:min-h-0 md:h-[650px]"
+    style="background-image: url('images/footer\ bg.png'); background-size: cover; background-position: center;">
+    <!-- Wave Design -->
+    <div class="relative">
+      <svg class="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none" style="transform: rotate(180deg);">
+        <path d="M0,0 C150,60 350,60 600,30 C850,0 1050,60 1200,30 L1200,120 L0,120 Z" fill="white"></path>
+      </svg>
+    </div>
+    <div class="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <!-- Top Section -->
+      <div class="relative flex flex-col sm:grid sm:grid-cols-1 md:grid-cols-4 sm:gap-8 mb-8 gap-4 flex-row">
+        <!-- Logo Section -->
+        <div class="flex flex-col items-start md:items-start justify-center mb-4 md:mb-0 w-full">
+          <div class="flex items-start mb-6 justify-start md:justify-start w-full">
+            <img src="images/logo3.png" alt="Al Haramain Logo" class="h-[70px] md:h-[100px] mr-0 md:mr-4" />
+          </div>
+          <!-- Certification Logos -->
+          <div class="flex flex-wrap items-center justify-start md:justify-start gap-2 md:gap-4 mb-6 w-full">
+            <img src="images/logo2.png" class="h-10 md:h-12" alt="IATA" />
+
+          </div>
+        </div>
+        <!-- Help & Support -->
+        <div class="flex flex-col items-start md:items-center justify-center md:ml-24 w-full">
+          <h4 class="text-[#c1a269] font-semibold mb-4 text-left w-full md:ml-[50px]">Help & Support</h4>
+          <ul class="space-y-2 text-gray-400 text-left md:text-left w-full md:ml-[50px]">
+            <li><a href="#" class="hover:text-white transition">Blogs</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms and Conditions</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Visa Information</a></li>
+          </ul>
+        </div>
+        <!-- Trust Badges -->
+        <div class="flex flex-col items-end md:items-end justify-center gap-1 md:col-span-2 w-full
+                    absolute right-4 top-0 sm:static sm:right-auto sm:top-auto ">
+          <div class="flex flex-wrap gap-2 justify-end md:justify-end md:ml-12 w-full md:mr-[170px] mt-[200px] sm:mt-0">
+            <img src="images/footer icon 1.jpg" class="h-10 md:h-12" alt="GDPR" />
+            <img src="images/footer icon 2.jpg" class="h-10 md:h-12" alt="100%" />
+            <img src="images/footer icon3.jpg" class="h-10 md:h-12" alt="Award" />
+            <img src="images/footer icon 4.jpg" class="h-10 md:h-12" alt="GeoTrust" />
+          </div>
+        </div>
+      </div>
+      <!-- Bottom Section -->
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col gap-8 sm:grid sm:grid-cols-1 md:grid-cols-3 sm:gap-8">
+          <!-- Contact -->
+          <div class="flex flex-col items-start md:items-start text-left md:text-left w-full -mt-10 sm:mt-0">
+            <h4 class="text-[#c1a269] font-semibold mb-4 text-left w-full">Contact</h4>
+            <div class="space-y-3 text-gray-400 w-full">
+              <div class="flex flex-col items-start md:flex-row md:items-start gap-2 md:gap-0 w-full">
+                <i class="fas fa-map-marker-alt text-[#c1a269] mr-0 md:mr-3 mt-1"></i>
+                <div>
+                  <p>Office 18, College Rd, Whalley Range, Manchester</p>
+                  <p>M16 8BP</p>
+                </div>
+              </div>
+              <div class="flex flex-col items-start md:flex-row md:items-center gap-2 md:gap-0 w-full">
+                <i class="fas fa-phone text-[#c1a269] mr-0 md:mr-3"></i>
+                <p>0203 062 8926</p>
+              </div>
+              <div class="flex flex-col items-start md:flex-row md:items-center gap-2 md:gap-0 w-full">
+                <i class="fas fa-envelope text-[#c1a269] mr-0 md:mr-3"></i>
+                <p>info@alharamaintravel.co.uk</p>
+              </div>
+            </div>
+          </div>
+          <!-- Payment Methods and Follow Us -->
+          <div
+            class="flex flex-col items-start md:items-start justify-between gap-4 ml-0 md:ml-[400px] w-full -mt-6 sm:mt-0">
+            <div class="flex flex-col items-start md:items-start mb-4 w-full">
+              <h4 class="text-[#c1a269] font-semibold mb-2 text-left w-full">Payment method</h4>
+              <div class="flex flex-nowrap justify-start gap-2 mb-4 w-full">
+                <img src="images/visa.webp" class="h-6" alt="Visa" />
+                <img src="images/visa.webp" class="h-6" alt="Visa" />
+                <img src="images/mastercard.png" class="h-6" alt="Mastercard" />
+                <img src="images/mastercard.png" class="h-6" alt="Mastercard" />
+                <img src="images/paypal.png" class="h-6" alt="Paypal" />
+              </div>
+              <h4 class="text-[#c1a269] font-semibold mb-2 text-left w-full -mt-4 sm:mt-0 ">Follow Us</h4>
+              <div class="flex justify-start md:justify-start gap-2 w-full">
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-instagram"></i></a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-facebook-f"></i></a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+</body>
+</html>
+

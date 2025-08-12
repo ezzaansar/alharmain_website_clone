@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <style>
+    .glass {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #374151;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #6B7280;
+        border-radius: 2px;
+    }
+     .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-open .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .kaaba-bg {
+            background-image: url('images/kaba\ logo.jpg');
+            background-size: 42px 42px;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+
+        .mosque-bg {
+            background-image: url('images/madinah.png');
+            background-size: 42px 42px;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .experience-box {
+            background: linear-gradient(135deg, #d4af37, #c9b037);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .kaaba-image {
+            background: linear-gradient(135deg, #2c1810, #4a2c17);
+            background-image:
+                radial-gradient(circle at 30% 40%, #d4af37 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, #d4af37 1px, transparent 1px);
+        }
+
+        .mosque-interior {
+            background: linear-gradient(135deg, #6b4423, #8b5a2b);
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.1) 10px, rgba(212, 175, 55, 0.1) 20px);
+        }
+
+        .crowd-image {
+            background: linear-gradient(135deg, #4a4a4a, #6a6a6a);
+            background-image:
+                radial-gradient(circle at 20% 20%, #d4af37 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, #d4af37 1px, transparent 1px);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .quote-marks {
+            font-size: 4rem;
+            line-height: 1;
+            color: #c1a269;
+            font-family: Georgia, serif;
+        }
+
+        .star {
+            color: #c1a269;
+        }
+
+        @keyframes scrollInfinite {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scrollInfinite 30s linear infinite;
+        }
+
+        @keyframes scrollInfinite {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scrollInfinite 30s linear infinite;
+        }
+</style>
+
+</head>
+
+    
+
+<body>
+    <!-- Mobile Top Navbar: All logos in one row -->
+    <div class="w-full border-b bg-white py-2 px-2 flex items-center justify-between gap-2 sm:hidden">
+        <img src="images/logo3.png" class="h-14 w-35 rounded-lg bg-white p-1 shadow" alt="Kaaba" />
+        <img src="images/logo2.png" class="h-8" alt="IATA" />
+        <img src="images/logo1.png" class="h-8" alt="Trustpilot" />
+        <button class="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center"><i class="fab fa-whatsapp text-white text-2xl"></i></button>
+        <button class="w-10 h-10 bg-[#c1a269] rounded-lg flex items-center justify-center"><i class="fas fa-phone-alt text-white text-2xl"></i></button>
+    </div>
+    <!-- Mobile Main Navbar: Home and Hamburger (under logo row) -->
+    <div x-data="{ open: false }" class="w-full bg-black bg-opacity-80 flex flex-col sm:hidden">
+        <div class="flex items-center justify-between px-4 py-2">
+            <span class="text-white text-2xl font-normal">Blog</span>
+            <button @click="open = !open"><i class="fas fa-bars text-white text-3xl"></i></button>
+        </div>
+        <div x-show="open" @click.away="open = false" class="flex flex-col gap-2 px-4 pb-4 animate-fade-in" style="display: none;">
+            <a href="index.html" class="text-white text-lg py-1">Home</a>
+            <a href="packagesdetail.html" class="text-white text-lg py-1">Umrah Packages</a>
+            <a href="packageslisting.html" class="text-white text-lg py-1">Hajj 2025</a>
+            <a href="holidays.html" class="text-white text-lg py-1">Umrah and Holiday</a>
+            <a href="blogsdetail.html" class="text-white text-lg py-1">Umrah Info</a>
+            <a href="contact.html" class="text-white text-lg py-1">Contact Us</a>
+            <a href="beatmyprice.html" class="text-white text-lg py-1">Beat my prize</a>
+        </div>
+    </div>
+
+    <!-- Desktop Top Navbar -->
+    <div class="w-full border-b bg-white py-3 px-2 sm:px-4 md:px-8 hidden sm:block">
+        <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+            <!-- Logo + Trust -->
+            <div class="flex flex-col md:flex-row items-center md:gap-14 w-full md:w-auto">
+                <div class="flex justify-center md:justify-start items-center gap-4 md:gap-6 md:ml-20">
+                    <img src="images/logo3.png" class="h-[70px] w-[140px] sm:h-[100px] sm:w-[220px]" alt="Kaaba" />
+                </div>
+                <div class="flex justify-center md:justify-start items-center gap-6 md:gap-14 mt-2 md:mt-0 md:ml-20">
+                    <img src="images/logo2.png" class="h-7 sm:h-9" alt="IATA" />
+                    <img src="images/logo1.png" class="h-8 sm:h-11" alt="Trustpilot" />
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 w-full md:w-auto md:justify-end mt-2 md:mt-0">
+                <div class="flex items-center gap-2">
+                    <div class="bg-green-700 text-white p-2 rounded-md">
+                        <i class="fab fa-whatsapp text-2xl sm:text-3xl"></i>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-xs sm:text-sm text-gray-500">WhatsApp:</p>
+                        <p class="font-bold text-[#c1a269] text-sm sm:text-base">0203 062 8926</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 md:mr-20">
+                    <div class="bg-[#c7a86c] text-white p-2 rounded-md">
+                        <i class="fas fa-phone-alt text-xl sm:text-2xl"></i>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-xs sm:text-sm text-gray-500">Call Now:</p>
+                        <p class="font-bold text-[#c1a269] text-sm sm:text-base">0203 062 8926</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Image Section -->
+    <div class="relative w-full h-[220px] md:h-[400px] flex items-center justify-center mb-[12px] md:mb-0"
+        style="background-image: url('images/blogs\ 1\ image.png'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black bg-opacity-30">
+            <!-- Navbar -->
+            <nav class="w-full glass z-20 relative hidden sm:block">
+                <div class="max-w-screen-xl mx-auto flex items-center justify-center px-4 md:px-8">
+                    <ul class="flex flex-wrap items-center gap-6 md:gap-10 py-8 font-medium text-white">
+                        <li><a href="#" class="hover:text-[#c1a269] transition-colors duration-200">Home</a></li>
+
+                        <!-- Umrah Packages -->
+                        <li class="relative group">
+                            <button
+                                class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+                                Umrah Packages
+                                <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200"
+                                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <ul
+                                class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Economy
+                                        Umrah</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Premium
+                                        Umrah</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">VIP
+                                        Umrah</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Hajj -->
+                        <li class="relative group">
+                            <button
+                                class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+                                Hajj 2025
+                                <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200"
+                                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <ul
+                                class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Economy
+                                        Hajj</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Premium
+                                        Hajj</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#" class="hover:text-[#c1a269] transition-colors duration-200">Umrah and
+                                Holiday</a></li>
+
+                        <!-- Umrah Info -->
+                        <li class="relative group">
+                            <button
+                                class="flex items-center gap-1 hover:text-[#c1a269] transition-colors duration-200 focus:outline-none">
+                                Umrah Info
+                                <svg class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-200"
+                                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <ul
+                                class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-black text-white border border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-200 z-30">
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Visa
+                                        Info</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-[#c1a269] hover:text-black">Travel
+                                        Guide</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#" class="hover:text-[#c1a269] transition-colors duration-200">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-[#c1a269] transition-colors duration-200">Beat my prize</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-start justify-center w-full h-full pl-8 md:pl-20">
+            <h1
+                class="text-white text-3xl md:text-5xl font-serif font-medium mb-2 text-left md:ml-[150px] md:mt-[50px]">
+                Blogs & News for your</h1>
+                 
+            <div class="flex flex-col items-start">
+             
+                 <span     class="font-medium font-serif text-white md:text-5xl md:ml-[150px] ">Spiritual Journey</span>
+            </div>
+        </div>
+    </div>
+ <!-- Blog Section Wrapper and Header (copied from index.html) -->
+<div class="max-w-6xl mx-auto px-4 py-12">
+  <!-- Header Section -->
+ 
+
+  <!-- Blog Cards Grid/Carousel (existing code) -->
+  <div x-data="{ idx: 0, cards: [0,1,2] }" class="relative">
+    <!-- Mobile Carousel Controls -->
+    <div class="flex justify-between items-center mb-4 md:hidden">
+      <button @click="idx = idx === 0 ? cards.length - 1 : idx - 1"
+        class="p-2 rounded-full border border-[#c1a269] hover:bg-gray-100 transition-colors">
+        <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      <div class="flex gap-1">
+        <template x-for="i in cards.length">
+          <div :class="{'bg-[#c1a269]': idx === i-1, 'bg-gray-300': idx !== i-1}" class="w-2 h-2 rounded-full"></div>
+        </template>
+      </div>
+      <button @click="idx = idx === cards.length - 1 ? 0 : idx + 1"
+        class="p-2 rounded-full border border-[#c1a269] hover:bg-gray-100 transition-colors">
+        <svg class="w-5 h-5 text-[#c1a269]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    </div>
+    <!-- Carousel for Mobile -->
+    <div class="md:hidden">
+      <template x-if="idx === 0">
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+          <div class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+            <img src="images/blog1.png" alt="Kaaba in Mecca" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Umrah in Ramadan holds a special place, know why?</h3>
+            <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+            <button class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read Now</button>
+          </div>
+        </div>
+      </template>
+      <template x-if="idx === 1">
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+          <div class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+            <img src="images/blog2.jpg" alt="Kaaba at night" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 2</h3>
+            <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+            <button class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read Now</button>
+          </div>
+        </div>
+      </template>
+      <template x-if="idx === 2">
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+          <div class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+            <img src="images/blog3.jpg" alt="Kaaba with intricate details" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 3</h3>
+            <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+            <button class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read Now</button>
+          </div>
+        </div>
+      </template>
+    </div>
+    <!-- Grid for Desktop -->
+    <div class="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      <!-- Blog Card 1 -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+        <div class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+          <img src="images/blog1.png" alt="Kaaba in Mecca" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Umrah in Ramadan holds a special place, know why?</h3>
+          <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+          <button class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read Now</button>
+        </div>
+      </div>
+      <!-- Blog Card 2 -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+        <div class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+          <img src="images/blog2.jpg" alt="Kaaba at night" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 2</h3>
+          <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+          <button class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read Now</button>
+        </div>
+      </div>
+      <!-- Blog Card 3 -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden transition-shadow h-full flex flex-col border border-transparent hover:border-[#c1a269] hover:shadow-none">
+        <div class="w-[340px] h-[150px] bg-gradient-to-b from-blue-300 to-blue-100 relative border rounded-xl overflow-hidden m-2 mr-[10px]">
+          <img src="images/blog3.jpg" alt="Kaaba with intricate details" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Blog 3</h3>
+          <p class="text-sm text-gray-500 mb-4">22/7/24</p>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed">Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis. Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+          <button class="w-full py-2 border border-[#c1a269] text-[#c1a269] rounded-md hover:bg-amber-50 transition-colors mt-auto">Read Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+    const slider = document.getElementById('slider');
+
+    function scrollLeft() {
+      slider.scrollBy({ left: -450, behavior: 'smooth' });
+    }
+
+    function scrollRight() {
+      slider.scrollBy({ left: 450, behavior: 'smooth' });
+    }
+
+    function expandCard(card) {
+      document.querySelectorAll('.card').forEach(c => {
+        c.style.transform = 'scaleY(1)';
+      });
+
+      if (card.style.transform === 'scaleY(1.3)') {
+        card.style.transform = 'scaleY(1)';
+      } else {
+        card.style.transform = 'scaleY(1.3)';
+      }
+    }
+
+    // Add some interactivity to the dropdown
+    document.querySelector('button').addEventListener('click', function () {
+      this.classList.toggle('dropdown-open');
+    });
+
+    // Add click handlers for duration buttons
+    document.querySelectorAll('.flex.items-center.gap-4 button').forEach(button => {
+      button.addEventListener('click', function () {
+        // Remove active class from all buttons
+        document.querySelectorAll('.flex.items-center.gap-4 button').forEach(btn => {
+          btn.classList.remove('bg-green-700', 'text-white');
+          btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+        });
+
+        // Add active class to clicked button
+        this.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+        this.classList.add('bg-green-700', 'text-white');
+      });
+    });
+
+    // Add click handlers for star rating filters
+    document.querySelectorAll('.flex.items-center.gap-6 > div').forEach(rating => {
+      rating.addEventListener('click', function () {
+        // Remove active class from all ratings
+        document.querySelectorAll('.flex.items-center.gap-6 > div').forEach(r => {
+          r.classList.remove('bg-green-700', 'text-white');
+          r.classList.add('bg-white', 'border', 'border-gray-300');
+          r.querySelectorAll('svg').forEach(star => {
+            star.classList.remove('text-white');
+            star.classList.add('text-green-700');
+          });
+        });
+
+        // Add active class to clicked rating
+        this.classList.remove('bg-white', 'border', 'border-gray-300');
+        this.classList.add('bg-green-700', 'text-white');
+        this.querySelectorAll('svg').forEach(star => {
+          star.classList.remove('text-green-700');
+          star.classList.add('text-white');
+        });
+      });
+    });
+  </script>
+      <!-- Related Umrah Packages Section -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <div class="flex items-center justify-between mb-2">
+            <div>
+                <h2 class="text-2xl md:text-4xl font-serif font-medium mb-2">Explore Umrah packages 2025</h2>
+                <p class="text-gray-500 text-sm md:text-base max-w-2xl">Urna, massa aliqua dui pellentesque. Ac, gravida
+                    in. Diam vitae, nec mattis lectus quam pretium amet facilisis.</p>
+            </div>
+            <div class="hidden md:flex items-center gap-2">
+                <button onclick="scrollUmrahCarousel(-1)"
+                    class="w-8 h-8 rounded-full border border-[#c1a269] flex items-center justify-center text-[#c1a269] hover:bg-[#f8f5ef] transition md:mr-[2px]"><i
+                        class="fas fa-chevron-left"></i></button>
+                <button onclick="scrollUmrahCarousel(1)"
+                    class="w-8 h-8 rounded-full border border-[#c1a269] flex items-center justify-center text-[#c1a269] hover:bg-[#f8f5ef] transition md:mr-[130px]"><i
+                        class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="flex gap-6 overflow-x-auto no-scrollbar py-4 ml-2 md:ml-2" id="umrah-carousel">
+            <!-- Card 1 -->
+            <div
+                class="min-w-[240px] max-w-[280px] bg-black rounded-xl overflow-hidden shadow-lg relative flex-shrink-0 group">
+                <img src="images/kaaba door.jpg" class="w-full h-60 object-cover" alt="September Umrah Packages" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end p-4">
+                    <div class="bg-black/60 rounded-xl p-4 w-full transition-all duration-300">
+                        <h3 class="text-white text-lg font-semibold">September Umrah Packages</h3>
+                        <div class="hidden group-hover:block transition-all duration-300">
+                            <p class="text-gray-200 text-xs mb-1 mt-2">7 Days - <span class="font-semibold">14
+                                    Days</span></p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-white text-sm">From <span class="font-bold">£500</span></span>
+                                <button
+                                    class="px-3 py-1 rounded border border-[#c1a269] text-[#c1a269] text-xs font-semibold bg-transparent hover:bg-[#c1a269] hover:text-white transition">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div
+                class="min-w-[240px] max-w-[280px] bg-black rounded-xl overflow-hidden shadow-lg relative flex-shrink-0 group">
+                <img src="images/blog1.png" class="w-full h-60 object-cover" alt="Easter Umrah Packages" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end p-4">
+                    <div class="bg-black/60 rounded-xl p-4 w-full transition-all duration-300">
+                        <h3 class="text-white text-lg font-semibold">Easter Umrah Packages</h3>
+                        <div class="hidden group-hover:block transition-all duration-300">
+                            <p class="text-gray-200 text-xs mb-1 mt-2">7 Days - <span class="font-semibold">14
+                                    Days</span></p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-white text-sm">From <span class="font-bold">£500</span></span>
+                                <button
+                                    class="px-3 py-1 rounded border border-[#c1a269] text-[#c1a269] text-xs font-semibold bg-transparent hover:bg-[#c1a269] hover:text-white transition">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div
+                class="min-w-[240px] max-w-[280px] bg-black rounded-xl overflow-hidden shadow-lg relative flex-shrink-0 group">
+                <img src="images/madinah .png" class="w-full h-60 object-cover" alt="December Umrah Packages" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end p-4">
+                    <div class="bg-black/60 rounded-xl p-4 w-full transition-all duration-300">
+                        <h3 class="text-white text-lg font-semibold">December Umrah Packages</h3>
+                        <div class="hidden group-hover:block transition-all duration-300">
+                            <p class="text-gray-200 text-xs mb-1 mt-2">7 Days - <span class="font-semibold">14
+                                    Days</span></p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-white text-sm">From <span class="font-bold">£500</span></span>
+                                <button
+                                    class="px-3 py-1 rounded border border-[#c1a269] text-[#c1a269] text-xs font-semibold bg-transparent hover:bg-[#c1a269] hover:text-white transition">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div
+                class="min-w-[240px] max-w-[280px] bg-black rounded-xl overflow-hidden shadow-lg relative flex-shrink-0 group">
+                <img src="images/image 4.jpg" class="w-full h-60 object-cover" alt="August Umrah Packages" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end p-4">
+                    <div class="bg-black/60 rounded-xl p-4 w-full transition-all duration-300">
+                        <h3 class="text-white text-lg font-semibold">August Umrah Packages</h3>
+                        <div class="hidden group-hover:block transition-all duration-300">
+                            <p class="text-gray-200 text-xs mb-1 mt-2">7 Days - <span class="font-semibold">14
+                                    Days</span></p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-white text-sm">From <span class="font-bold">£500</span></span>
+                                <button
+                                    class="px-3 py-1 rounded border border-[#c1a269] text-[#c1a269] text-xs font-semibold bg-transparent hover:bg-[#c1a269] hover:text-white transition">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Arrows -->
+        <div class="flex md:hidden justify-end gap-2 mt-2">
+            <button onclick="scrollUmrahCarousel(-1)"
+                class="w-8 h-8 rounded-full border border-[#c1a269] flex items-center justify-center text-[#c1a269] hover:bg-[#f8f5ef] transition"><i
+                    class="fas fa-chevron-left"></i></button>
+            <button onclick="scrollUmrahCarousel(1)"
+                class="w-8 h-8 rounded-full border border-[#c1a269] flex items-center justify-center text-[#c1a269] hover:bg-[#f8f5ef] transition"><i
+                    class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+  
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <!-- Left Side -->
+      <div class="pl-4 md:pl-0">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-[#c1a269] text-lg">✦</span>
+          <span class="uppercase text-[#c1a269] font-medium tracking-widest text-sm">Customize</span>
+        </div>
+        <h2 class="font-playfair text-3xl lg:text-4xl font-medium text-gray-800 leading-tight mb-4">Let Our Experts
+          Create The Perfect Package For You</h2>
+        <p class="text-gray-600 mb-8 max-w-md">Whether you're planning a spiritual Umrah journey or want to combine it
+          with a relaxing holiday — we've got you covered.</p>
+        <img src="images/consult.jpg" alt="Expert Consultation" class="rounded-xl w-full max-w-md">
+      </div>
+      <!-- Right Side -->
+      <div class="bg-white rounded-xl border border-[#c1a269] p-8 shadow-sm max-w-md mx-auto">
+        <h3 class="font-playfair text-xl font-medium text-gray-800 mb-6">Choose Your Journey Type</h3>
+        <div class="flex items-start justify-between mb-6">
+          <div class="flex flex-col gap-4 mt-2">
+          <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="journey" class="accent-[#005E38]" checked>
+            <span class="text-gray-800">Umrah Only</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="journey" class="accent-[#005E38]">
+            <span class="text-gray-800">Umrah with Holiday Extension</span>
+          </label>
+          </div>
+          <div class="flex flex-col items-end ml-8 mt-[-12px]">
+            <img src="images/clip.png" alt="Clip" class="w-7 h-7 mb-1">
+            <img src="images/kabaa logo.png" alt="Kaaba" class="w-12 h-12">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm mb-1">Departure City</label>
+          <input type="text" placeholder="Demo"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-[#c1a269] bg-white">
+        </div>
+        <div class="flex gap-4 mb-4">
+          <div class="flex-1">
+            <label class="block text-gray-700 text-sm mb-1">No. Of Pax</label>
+            <input type="text" placeholder="2"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-[#c1a269] bg-white">
+          </div>
+          <div class="flex-1">
+            <label class="block text-gray-700 text-sm mb-1">Hotel Preference</label>
+            <input type="text" placeholder="3 Stars"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-[#c1a269] bg-white">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm mb-1">Departure dates <span class="text-xs text-gray-400">( Select
+              Any )</span></label>
+          <div class="flex gap-2">
+            <button class="flex-1 py-2 rounded-md bg-gray-200 text-gray-700 font-medium">Fixed</button>
+            <button class="flex-1 py-2 rounded-md bg-gray-200 text-gray-700 font-medium">Flexible</button>
+            <button class="flex-1 py-2 rounded-md bg-gray-200 text-gray-700 font-medium">Anytime</button>
+          </div>
+        </div>
+        <button
+          class="w-full mt-6 py-3 rounded-md bg-[#c1a269] text-white font-medium text-lg hover:bg-[#b8955c] transition-colors">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="w-full bg-white py-12 overflow-hidden">
+    <h2 class="text-4xl font-serif font-normal text-center mb-10">Airlines</h2>
+
+    <!-- Outer wrapper hides overflow -->
+    <div class="relative w-full overflow-hidden">
+      <!-- Scrolling container -->
+      <div class="flex animate-scroll w-max gap-10">
+
+        <!-- Logo Set - repeated twice for seamless loop -->
+        <div class="flex gap-10">
+      <img src="images/alg1.png" alt="Al Shohada Hotel" class="w-24 h-16 object-contain" />
+      <img src="images/alg2.png" alt="ELAF" class="w-24 h-16 object-contain" />
+      <img src="images/alg3.png" alt="VOCO" class="w-34 h-16 object-contain" />
+      <img src="images/alg4.png" alt="Fairmont" class="w-25 h-16 object-contain" />
+      <img src="images/alg5.png" alt="Makarem" class="w-24 h-16 object-contain" />
+      <img src="images/alg6.png" alt="Swissotel" class="w-24 h-16 object-contain" />
+      <img src="images/alg8.png" alt="Pullman" class="w-24 h-16 object-contain" />
+      <img src="images/alg7.png" alt="Hilton" class="w-25 h-16 object-contain" />
+      <img src="images/alg11.png" alt="Conrad" class="w-25 h-16 object-contain" />
+    </div>
+
+        <!-- Duplicate set for infinite loop -->
+        <div class="flex gap-10">
+          <img src="images/alg1.png" alt="Al Shohada Hotel" class="w-24 h-16 object-contain" />
+          <img src="images/alg2.png" alt="ELAF" class="w-24 h-16 object-contain" />
+          <img src="images/alg3.png" alt="VOCO" class="w-34 h-16 object-contain" />
+          <img src="images/alg4.png" alt="Fairmont" class="w-25 h-16 object-contain" />
+          <img src="images/alg5.png" alt="Makarem" class="w-24 h-16 object-contain" />
+          <img src="images/alg6.png" alt="Swissotel" class="w-24 h-16 object-contain" />
+          <img src="images/alg8.png" alt="Pullman" class="w-24 h-16 object-contain" />
+          <img src="images/alg7.png" alt="Hilton" class="w-25 h-16 object-contain" />
+          <img src="images/alg11.png" alt="Conrad" class="w-25 h-16 object-contain" />
+  </div>
+
+      </div>
+    </div>
+  </div>
+  <footer class="relative bg-[#181715] text-white h-auto min-h-[650px] md:min-h-0 md:h-[650px]"
+    style="background-image: url('images/footer\ bg.png'); background-size: cover; background-position: center;">
+    <!-- Wave Design -->
+    <div class="relative">
+      <svg class="w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none" style="transform: rotate(180deg);">
+        <path d="M0,0 C150,60 350,60 600,30 C850,0 1050,60 1200,30 L1200,120 L0,120 Z" fill="white"></path>
+      </svg>
+    </div>
+    <div class="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <!-- Top Section -->
+      <div class="relative flex flex-col sm:grid sm:grid-cols-1 md:grid-cols-4 sm:gap-8 mb-8 gap-4 flex-row">
+        <!-- Logo Section -->
+        <div class="flex flex-col items-start md:items-start justify-center mb-4 md:mb-0 w-full">
+          <div class="flex items-start mb-6 justify-start md:justify-start w-full">
+            <img src="images/logo3.png" alt="Al Haramain Logo" class="h-[70px] md:h-[100px] mr-0 md:mr-4" />
+          </div>
+          <!-- Certification Logos -->
+          <div class="flex flex-wrap items-center justify-start md:justify-start gap-2 md:gap-4 mb-6 w-full">
+            <img src="images/logo2.png" class="h-10 md:h-12" alt="IATA" />
+
+          </div>
+        </div>
+        <!-- Help & Support -->
+        <div class="flex flex-col items-start md:items-center justify-center md:ml-24 w-full">
+          <h4 class="text-[#c1a269] font-semibold mb-4 text-left w-full md:ml-[50px]">Help & Support</h4>
+          <ul class="space-y-2 text-gray-400 text-left md:text-left w-full md:ml-[50px]">
+            <li><a href="#" class="hover:text-white transition">Blogs</a></li>
+            <li><a href="#" class="hover:text-white transition">Terms and Conditions</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition">Visa Information</a></li>
+          </ul>
+        </div>
+        <!-- Trust Badges -->
+        <div class="flex flex-col items-end md:items-end justify-center gap-1 md:col-span-2 w-full
+                    absolute right-4 top-0 sm:static sm:right-auto sm:top-auto ">
+          <div class="flex flex-wrap gap-2 justify-end md:justify-end md:ml-12 w-full md:mr-[170px] mt-[200px] sm:mt-0">
+            <img src="images/footer icon 1.jpg" class="h-10 md:h-12" alt="GDPR" />
+            <img src="images/footer icon 2.jpg" class="h-10 md:h-12" alt="100%" />
+            <img src="images/footer icon3.jpg" class="h-10 md:h-12" alt="Award" />
+            <img src="images/footer icon 4.jpg" class="h-10 md:h-12" alt="GeoTrust" />
+          </div>
+        </div>
+      </div>
+      <!-- Bottom Section -->
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col gap-8 sm:grid sm:grid-cols-1 md:grid-cols-3 sm:gap-8">
+          <!-- Contact -->
+          <div class="flex flex-col items-start md:items-start text-left md:text-left w-full -mt-10 sm:mt-0">
+            <h4 class="text-[#c1a269] font-semibold mb-4 text-left w-full">Contact</h4>
+            <div class="space-y-3 text-gray-400 w-full">
+              <div class="flex flex-col items-start md:flex-row md:items-start gap-2 md:gap-0 w-full">
+                <i class="fas fa-map-marker-alt text-[#c1a269] mr-0 md:mr-3 mt-1"></i>
+                <div>
+                  <p>Office 18, College Rd, Whalley Range, Manchester</p>
+                  <p>M16 8BP</p>
+                </div>
+              </div>
+              <div class="flex flex-col items-start md:flex-row md:items-center gap-2 md:gap-0 w-full">
+                <i class="fas fa-phone text-[#c1a269] mr-0 md:mr-3"></i>
+                <p>0203 062 8926</p>
+              </div>
+              <div class="flex flex-col items-start md:flex-row md:items-center gap-2 md:gap-0 w-full">
+                <i class="fas fa-envelope text-[#c1a269] mr-0 md:mr-3"></i>
+                <p>info@alharamaintravel.co.uk</p>
+              </div>
+            </div>
+          </div>
+          <!-- Payment Methods and Follow Us -->
+          <div
+            class="flex flex-col items-start md:items-start justify-between gap-4 ml-0 md:ml-[400px] w-full -mt-6 sm:mt-0">
+            <div class="flex flex-col items-start md:items-start mb-4 w-full">
+              <h4 class="text-[#c1a269] font-semibold mb-2 text-left w-full">Payment method</h4>
+              <div class="flex flex-nowrap justify-start gap-2 mb-4 w-full">
+                <img src="images/visa.webp" class="h-6" alt="Visa" />
+                <img src="images/visa.webp" class="h-6" alt="Visa" />
+                <img src="images/mastercard.png" class="h-6" alt="Mastercard" />
+                <img src="images/mastercard.png" class="h-6" alt="Mastercard" />
+                <img src="images/paypal.png" class="h-6" alt="Paypal" />
+              </div>
+              <h4 class="text-[#c1a269] font-semibold mb-2 text-left w-full -mt-4 sm:mt-0 ">Follow Us</h4>
+              <div class="flex justify-start md:justify-start gap-2 w-full">
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-instagram"></i></a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-facebook-f"></i></a>
+                <a href="#"
+                  class="w-10 h-10 rounded-full flex items-center justify-center border border-[#c1a269] text-[#c1a269] hover:bg-[#c1a269]/10 transition -mt-2 sm:mt-0"><i
+                    class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
